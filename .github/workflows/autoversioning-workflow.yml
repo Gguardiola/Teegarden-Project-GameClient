@@ -59,7 +59,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           tag_name: v${{ steps.gitversion.outputs.fullSemVer }}
-          name: Release v${{ steps.gitversion.outputs.fullSemVer }}
+          name: Teegarden-GameClient-v${{ steps.gitversion.outputs.fullSemVer }}
           body: |
             # CHANGELOG
             
