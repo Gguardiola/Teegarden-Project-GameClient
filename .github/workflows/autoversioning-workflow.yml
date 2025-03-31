@@ -38,7 +38,6 @@ jobs:
         run: |
           echo "### v${{ steps.gitversion.outputs.fullSemVer }}" >> new_changelog.md
           echo "" >> new_changelog.md
-          echo ${git log --format="- %s (%an)" $(git describe --tags --abbrev=0)..HEAD}
           git log --format="- %s (%an)" $(git describe --tags --abbrev=0)..HEAD >> new_changelog.md
           echo "" >> new_changelog.md
           echo "::set-output name=changelog::$(cat new_changelog.md)"
