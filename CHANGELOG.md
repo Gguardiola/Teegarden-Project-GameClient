@@ -1,3 +1,12 @@
+### v0.1.40
+
+commit fb3cf261dbd2bab625b01540f3aa1c3ea613648d
+Author: Gabodev <51827577+Gguardiola@users.noreply.github.com>
+Date:   Tue Apr 1 00:58:56 2025 +0200
+
+    Update autoversioning-workflow.yml
+
+
 ### v0.1.38
 
 commit 1544f73b77b19eb1bf7efbeec6e97f22795aaa1f
