@@ -38,9 +38,7 @@ jobs:
         run: |
           echo "### v${{ steps.gitversion.outputs.fullSemVer }}" >> new_changelog.md
           echo "" >> new_changelog.md
-          git log --pretty=format:"- %s (%an)" \
-          $(git tag --sort=-v:refname | head -n 1)..HEAD \
-          --invert-grep --grep="docs: Update CHANGELOG for v" >> new_changelog.md
+          git log $(git tag --sort=-v:refname | head -n 1)..HEAD --invert-grep --grep="docs: Update CHANGELOG for v" >> new_changelog.md
           echo "" >> new_changelog.md
           echo "::set-output name=changelog::$(cat new_changelog.md)"
           cat CHANGELOG.md >> new_changelog.md
