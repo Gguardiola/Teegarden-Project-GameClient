@@ -1,0 +1,46 @@
+name: Autoversioning workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    name: Generate Semantic Version
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Importante para que GitVersion pueda calcular la versión correctamente
+
+      - name: Install GitVersion
+        uses: GitTools/actions/gitversion/setup@v0
+        with:
+          versionSpec: '5.x'  # Última versión de GitVersion
+
+      - name: Determine Version
+        id: gitversion
+        uses: GitTools/actions/gitversion/execute@v0
+
+      - name: Show Generated Version
+        run: |
+          echo "Versión generada: ${{ steps.gitversion.outputs.fullSemVer }}"
+      - name: Create Git Tag
+        run: |
+          git tag v${{ steps.gitversion.outputs.fullSemVer }}
+          git push origin v${{ steps.gitversion.outputs.fullSemVer }}
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v${{ steps.gitversion.outputs.fullSemVer }}
+          name: Release v${{ steps.gitversion.outputs.fullSemVer }}
+          body: |
+            New version published: **v${{ steps.gitversion.outputs.fullSemVer }}**
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
