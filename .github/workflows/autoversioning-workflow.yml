@@ -33,13 +33,32 @@ jobs:
           git tag v${{ steps.gitversion.outputs.fullSemVer }}
           git push origin v${{ steps.gitversion.outputs.fullSemVer }}
 
+      - name: Generar línea de changelog
+        id: changelog
+        run: |
+          echo "### v${{ steps.gitversion.outputs.fullSemVer }}" >> new_changelog.md
+          echo "" >> new_changelog.md
+          git log --format="- %s (%an)" $(git describe --tags --abbrev=0)..HEAD >> new_changelog.md
+          echo "" >> new_changelog.md
+          cat CHANGELOG.md >> new_changelog.md
+          mv new_changelog.md CHANGELOG.md
+          echo "::set-output name=changelog::$(cat new_changelog.md)"
+
+      - name: Commit y push del changelog actualizado
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add CHANGELOG.md
+          git commit -m "docs: Update CHANGELOG for v${{ steps.gitversion.outputs.fullSemVer }}"
+          git push origin main          
+
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
           tag_name: v${{ steps.gitversion.outputs.fullSemVer }}
           name: Release v${{ steps.gitversion.outputs.fullSemVer }}
           body: |
-            New version published: **v${{ steps.gitversion.outputs.fullSemVer }}**
+            CHANGELOG: **v${{ steps.changelog.outputs.changelog }}**
           draft: false
           prerelease: false
         env:
