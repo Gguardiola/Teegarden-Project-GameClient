@@ -1,4 +1,3 @@
-next-version: 0.1.1
 mode: Mainline
 tag-prefix: "[vV]"
 increment: Inherit
@@ -7,3 +6,5 @@ minor-version-bump-message: '\+semver:\s?(feature|minor)'
 patch-version-bump-message: '\+semver:\s?(fix|patch)'
 no-bump-message: '\+semver:\s?(none|skip)'
 branches: {}
+ignore:
+  commits-before: 2025-04-01T01:08:00
