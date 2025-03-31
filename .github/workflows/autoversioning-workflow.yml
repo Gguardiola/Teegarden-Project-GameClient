@@ -58,7 +58,9 @@ jobs:
           tag_name: v${{ steps.gitversion.outputs.fullSemVer }}
           name: Release v${{ steps.gitversion.outputs.fullSemVer }}
           body: |
-            CHANGELOG: **v${{ steps.changelog.outputs.changelog }}**
+            #CHANGELOG
+            
+            **${{ steps.changelog.outputs.changelog }}**
           draft: false
           prerelease: false
         env:
