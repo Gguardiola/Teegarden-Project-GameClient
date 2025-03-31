@@ -1,0 +1,19 @@
+mode: Mainline
+
+branches:
+  main:
+    tag: ''
+    increment: Patch
+    prevent-increment-of-merged-branch-version: false
+    track-merge-target: true
+
+  feat:
+    tag: beta
+    increment: Minor
+
+  major:
+    tag: ''
+    increment: Major
+
+ignore:
+  sha: []
