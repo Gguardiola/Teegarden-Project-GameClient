@@ -38,11 +38,13 @@ jobs:
         run: |
           echo "### v${{ steps.gitversion.outputs.fullSemVer }}" >> new_changelog.md
           echo "" >> new_changelog.md
-          git log $(git tag --sort=-v:refname | head -n 1)..HEAD --invert-grep --grep="docs: Update CHANGELOG for v" >> new_changelog.md
-          echo "" >> new_changelog.md
-          echo "::set-output name=changelog::$(cat new_changelog.md)"
-          cat CHANGELOG.md >> new_changelog.md
-          mv new_changelog.md CHANGELOG.md
+          git log >> new_changelog.md
+          awk '{ buffer[NR%5] = $0 } /docs: Update CHANGELOG for v/ { exit } NR>4 { print buffer[(NR+1)%5] }' new_changelog.mod >> filtered_changelog.md
+          echo "" >> filtered_changelog.md
+          echo "::set-output name=changelog::$(cat filtered_changelog.md)"
+          cat CHANGELOG.md >> filtered_changelog.md
+          mv filtered_changelog.md CHANGELOG.md
+          rm new_changelog.md
           
       - name: Commit y push del changelog actualizado
         run: |
