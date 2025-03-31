@@ -39,7 +39,7 @@ jobs:
           echo "### v${{ steps.gitversion.outputs.fullSemVer }}" >> new_changelog.md
           echo "" >> new_changelog.md
           git log >> new_changelog.md
-          awk '{ buffer[NR%5] = $0 } /docs: Update CHANGELOG for v/ { exit } NR>4 { print buffer[(NR+1)%5] }' new_changelog.mod >> filtered_changelog.md
+          awk '{ buffer[NR%5] = $0 } /docs: Update CHANGELOG for v/ { exit } NR>4 { print buffer[(NR+1)%5] }' new_changelog.md >> filtered_changelog.md
           echo "" >> filtered_changelog.md
           echo "::set-output name=changelog::$(cat filtered_changelog.md)"
           cat CHANGELOG.md >> filtered_changelog.md
