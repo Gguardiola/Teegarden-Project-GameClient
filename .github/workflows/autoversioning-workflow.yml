@@ -62,7 +62,7 @@ jobs:
           body: |
             # CHANGELOG
             
-            **${{ steps.changelog.outputs.changelog }}**
+            ${{ steps.changelog.outputs.changelog }}
           draft: false
           prerelease: false
         env:
