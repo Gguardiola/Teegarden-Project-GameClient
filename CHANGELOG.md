@@ -1,3 +1,12 @@
+### v0.1.1
+
+commit e7766c6e159db858dbe3476a443f09b949ab56bb
+Author: gguardiola <gabriel.guardiola1999@gmail.com>
+Date:   Tue Apr 1 01:10:59 2025 +0200
+
+    fix: gitversion
+
+
 ### v0.1.43
 
 commit 4ba9fdab8c63ce008893efd208a6be64386daa02
