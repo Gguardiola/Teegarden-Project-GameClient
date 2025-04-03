@@ -1,3 +1,12 @@
+### v0.1.49
+
+commit 96fa655e3e2a87f1af59f3c8ff2d6ee513c6c4b4
+Author: Gguardiola <gabriel.guardiola1999@gmail.com>
+Date:   Thu Apr 3 21:49:28 2025 +0200
+
+    chore: linter stuff formatting
+
+
 ### v0.1.47
 
 commit 75763cf9ae0ffabdfad51bb6b723d8871e6d4571
