@@ -1,3 +1,18 @@
+### v0.1.51
+
+commit 0203729f303e9dea473301b6e0279782ffba542a
+Author: Gabodev <51827577+Gguardiola@users.noreply.github.com>
+Date:   Thu Apr 10 21:18:57 2025 +0200
+
+    Feature/7 ep1 movimiento personaje (#37)
+    
+    * feature(gameplay): Added player movements, camera and basic interactions
+    
+    * chore: .gitignore updated
+    
+    * refactor: Deleted uneeded files from repo
+
+
 ### v0.1.49
 
 commit 96fa655e3e2a87f1af59f3c8ff2d6ee513c6c4b4
