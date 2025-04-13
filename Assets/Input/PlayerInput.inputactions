@@ -798,6 +798,54 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "DEBUG",
+            "id": "9f09ea8c-bd64-4ce2-b3f6-f414dd52c384",
+            "actions": [
+                {
+                    "name": "DEBUG_1",
+                    "type": "Button",
+                    "id": "cee0255d-c144-4e42-9650-2aed1dcaa34e",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "DEBUG_2",
+                    "type": "Button",
+                    "id": "05206c48-0fb4-413e-affd-8d795edcd879",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "169ad300-33a0-44e8-a691-e7a97edaaced",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DEBUG_1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "806f2361-09dc-4b02-b709-c0e2125e525e",
+                    "path": "<Keyboard>/g",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DEBUG_2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []
