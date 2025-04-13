@@ -4,30 +4,62 @@ using UnityEngine.UI;
 public class PlayerHealth : MonoBehaviour
 {
     private float hp;
-    private float maxHp = 100f;
-    private float lerpTimer;
+    private float maxHp;
+    [Header("Health Bar")]
     private float chipSpeed = 2f;
     public TextMeshProUGUI healthText;
     public Image frontHealthBar;
     public Image backHealthBar;
+    private float lerpTimer;
+
+    [Header("Player overlay")] 
+    public Image overlay;
+    private float overlayDuration;
+    private float overlayFadeSpeed;
+    private float overlayFadeDuration;
+    private float damageAmountToAlpha;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        maxHp = PlayerConfig.Instance.maxHealth;
         hp = maxHp;
         healthText.text = hp.ToString() + "/" + maxHp.ToString();
+        overlay.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 0);
+
         
     }
 
     // Update is called once per frame
     void Update()
     {
-        hp = Mathf.Clamp(hp, 0, maxHp);
         UpdateHpUI();
+        UpdateDamageOverlay();
+    }
+
+    public void UpdateDamageOverlay()
+    {
+        damageAmountToAlpha = Mathf.Clamp(damageAmountToAlpha, 0, 1);
+        if(overlay.color.a > 0)
+        {
+            if (hp < 30)
+            {
+                return;
+            }
+            overlayFadeDuration += Time.deltaTime;
+            if (overlayFadeDuration > overlayDuration)
+            {
+                float damageAmountToAlphaFade = overlay.color.a;
+                damageAmountToAlphaFade -= Time.deltaTime * overlayFadeSpeed;
+                overlay.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, damageAmountToAlphaFade);
+            }
+        }        
     }
 
     public void UpdateHpUI()
     {
-        Debug.Log("PLAYER HP: " + hp);
+        hp = Mathf.Clamp(hp, 0, maxHp);
+        
         float fillFrontBar = frontHealthBar.fillAmount;
         float fillBackBar = backHealthBar.fillAmount;
         float hFraction = hp / maxHp;
@@ -54,9 +86,13 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        Debug.Log("PLAYER TOOK DAMAGE: " + damage);
         hp -= damage;
         lerpTimer = 0f;
+        overlayFadeDuration = 0f;
+        damageAmountToAlpha = ((maxHp / 100f) - (hp / maxHp));
+        Debug.Log("fade: " + damageAmountToAlpha);
+        overlay.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, damageAmountToAlpha);
+
 
     }
     

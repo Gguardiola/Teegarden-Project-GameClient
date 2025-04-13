@@ -1,16 +1,16 @@
 using UnityEngine;
 
-public class PlayerMotor : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     private CharacterController controller;
     private Vector3 playerVelocity;
     private bool isGrounded;
-    public bool lerpCrouch = false;
-    public float gravity = -9.81f;
-    public float speed = 5.0f;
-    public float jumpHeight = 1.5f;
-    public bool crouching = false;
-    public bool sprinting = false;
+    private bool lerpCrouch = false;
+    private float gravity;
+    private float speed;
+    private float jumpHeight;
+    private bool crouching = false;
+    private bool sprinting = false;
     private float crouchTimer = 0f;
     
     
@@ -18,6 +18,9 @@ public class PlayerMotor : MonoBehaviour
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        speed = PlayerConfig.Instance.speed;
+        jumpHeight = PlayerConfig.Instance.jumpHeight;
+        gravity = WorldConfig.Instance.gravity;
     }
 
     // Update is called once per frame
