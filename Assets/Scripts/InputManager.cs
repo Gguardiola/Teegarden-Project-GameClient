@@ -1,28 +1,33 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Random = UnityEngine.Random;
+
 public class InputManager : MonoBehaviour
 {
     private PlayerInput playerInput;
     public PlayerInput.OnFootActions onFoot;
-    private PlayerMotor motor;
+    public PlayerInput.DEBUGActions debug;
+    private PlayerMovement movement;
     private PlayerLook look;
     
     void Awake()
     {
         playerInput = new PlayerInput();
         onFoot = playerInput.OnFoot;
-        motor = GetComponent<PlayerMotor>();
-        onFoot.Jump.performed += ctx => motor.Jump();
+        movement = GetComponent<PlayerMovement>();
         look = GetComponent<PlayerLook>();
-        onFoot.Crouch.performed += ctx => motor.Crouch();
-        onFoot.Sprint.performed += ctx => motor.Sprint();
+        
+        onFoot.Jump.performed += ctx => movement.Jump();
+        onFoot.Crouch.performed += ctx => movement.Crouch();
+        onFoot.Sprint.performed += ctx => movement.Sprint();
+
     }
 
     private void FixedUpdate()
     {
-        //PlayerMotor movement
-        motor.ProcessMove(onFoot.Movement.ReadValue<Vector2>());
+        //PlayerMovement movement
+        movement.ProcessMove(onFoot.Movement.ReadValue<Vector2>());
     }
 
     private void LateUpdate()
