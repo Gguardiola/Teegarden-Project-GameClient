@@ -4,7 +4,7 @@ public class PlayerInteract : MonoBehaviour
 {
     private Camera cam;
     [SerializeField]
-    private float distance = 3f;
+    public float distance;
     [SerializeField]
     private LayerMask mask;
     private PlayerUI playerUI;
@@ -15,6 +15,7 @@ public class PlayerInteract : MonoBehaviour
         cam = GetComponent<PlayerLook>().cam;
         playerUI = GetComponent<PlayerUI>();
         inputManager = GetComponent<InputManager>();
+        distance = PlayerConfig.Instance.interactionDistance;
     }
 
     // Update is called once per frame

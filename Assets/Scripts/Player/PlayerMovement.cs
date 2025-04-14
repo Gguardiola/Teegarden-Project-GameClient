@@ -6,9 +6,9 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 playerVelocity;
     private bool isGrounded;
     private bool lerpCrouch = false;
-    private float gravity;
-    private float speed;
-    private float jumpHeight;
+    public float gravity;
+    public float speed;
+    public float jumpHeight;
     private bool crouching = false;
     private bool sprinting = false;
     private float crouchTimer = 0f;
@@ -47,7 +47,6 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
-    //Recieves the input for our InputManager and processes it into characterController.
     public void ProcessMove(Vector2 input)
     {
         Vector3 moveDirection = Vector3.zero;

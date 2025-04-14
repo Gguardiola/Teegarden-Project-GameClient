@@ -7,8 +7,13 @@ public class PlayerConfig : ScriptableObject
     [Header("Stats")]
     public float maxHealth = 100f;
     public float speed = 5.0f;
-    public float jumpHeight = 1.5f;
-    //categoria interaccion, movimiento, UI
+    public float jumpHeight = 1f;
+    public float criticalHealth = 50f;
+    [Header("Interactions")]
+    public float interactionDistance = 3f;
+    [Header("Camera")]
+    public float xSensitivity = 30f;
+    public float ySensitivity = 30f;
 #if UNITY_EDITOR
     [UnityEditor.MenuItem("Tools/Select PlayerConfig")]
     public static void SelectConfig()

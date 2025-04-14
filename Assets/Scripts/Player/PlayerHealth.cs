@@ -3,9 +3,9 @@ using UnityEngine;
 using UnityEngine.UI;
 public class PlayerHealth : MonoBehaviour
 {
-    private float hp;
-    private float maxHp;
     [Header("Health Bar")]
+    public float hp;
+    public float maxHp;
     private float chipSpeed = 2f;
     public TextMeshProUGUI healthText;
     public Image frontHealthBar;
@@ -14,8 +14,8 @@ public class PlayerHealth : MonoBehaviour
 
     [Header("Player overlay")] 
     public Image overlay;
-    private float overlayDuration;
-    private float overlayFadeSpeed;
+    private float overlayDuration = 2f;
+    private float overlayFadeSpeed = 5f;
     private float overlayFadeDuration;
     private float damageAmountToAlpha;
 
@@ -25,15 +25,13 @@ public class PlayerHealth : MonoBehaviour
         maxHp = PlayerConfig.Instance.maxHealth;
         hp = maxHp;
         healthText.text = hp.ToString() + "/" + maxHp.ToString();
-        overlay.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 0);
-
         
     }
 
     // Update is called once per frame
     void Update()
     {
-        UpdateHpUI();
+        UpdateHpBar();
         UpdateDamageOverlay();
     }
 
@@ -42,7 +40,7 @@ public class PlayerHealth : MonoBehaviour
         damageAmountToAlpha = Mathf.Clamp(damageAmountToAlpha, 0, 1);
         if(overlay.color.a > 0)
         {
-            if (hp < 30)
+            if (hp < PlayerConfig.Instance.criticalHealth)
             {
                 return;
             }
@@ -56,7 +54,7 @@ public class PlayerHealth : MonoBehaviour
         }        
     }
 
-    public void UpdateHpUI()
+    public void UpdateHpBar()
     {
         hp = Mathf.Clamp(hp, 0, maxHp);
         
@@ -90,15 +88,15 @@ public class PlayerHealth : MonoBehaviour
         lerpTimer = 0f;
         overlayFadeDuration = 0f;
         damageAmountToAlpha = ((maxHp / 100f) - (hp / maxHp));
-        Debug.Log("fade: " + damageAmountToAlpha);
-        overlay.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, damageAmountToAlpha);
-
-
+        if (hp < PlayerConfig.Instance.criticalHealth)
+        {
+            overlay.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, damageAmountToAlpha);
+        }
+        
     }
     
     public void RestoreHealth(float amount)
     {
-        Debug.Log("PLAYER RESTORED HEALTH: " + amount);
         hp += amount;
         lerpTimer = 0f;
     }
