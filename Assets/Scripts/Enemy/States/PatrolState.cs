@@ -7,17 +7,19 @@ public class PatrolState : BaseState
 
     public override void Enter()
     {
-        throw new System.NotImplementedException();
     }
 
     public override void Perform()
     {
         PatrolCycle();
+        if (enemyAI.CanSeePlayer())
+        {
+            enemyStateMachine.ChangeState(enemyAI.attackState);
+        }
     }
 
     public override void Exit()
     {
-        throw new System.NotImplementedException();
     }
 
     public void PatrolCycle()

@@ -3,12 +3,9 @@ using UnityEngine;
 public class EnemyStateMachine : MonoBehaviour
 {
     public BaseState activeState;
-    public PatrolState patrolState;
-
-    public void Initialize()
-    {
-        patrolState = new PatrolState();
-        ChangeState(patrolState);
+    public void Initialize(BaseState newState)
+    { 
+        ChangeState(newState);
     }
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created

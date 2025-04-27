@@ -2717,7 +2717,6 @@ GameObject:
   - component: {fileID: 437850952}
   - component: {fileID: 437850955}
   - component: {fileID: 437850954}
-  - component: {fileID: 437850953}
   m_Layer: 0
   m_Name: Eye2
   m_TagString: Untagged
@@ -2740,27 +2739,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1912899461}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &437850953
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 437850951}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &437850954
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5552,7 +5530,6 @@ GameObject:
   - component: {fileID: 963474674}
   - component: {fileID: 963474677}
   - component: {fileID: 963474676}
-  - component: {fileID: 963474675}
   m_Layer: 0
   m_Name: Eye1
   m_TagString: Untagged
@@ -5575,27 +5552,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1912899461}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &963474675
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 963474673}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &963474676
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -9655,7 +9611,6 @@ GameObject:
   - component: {fileID: 1663491025}
   - component: {fileID: 1663491028}
   - component: {fileID: 1663491027}
-  - component: {fileID: 1663491026}
   m_Layer: 0
   m_Name: Mouth
   m_TagString: Untagged
@@ -9678,29 +9633,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1912899461}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &1663491026
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1663491024}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!23 &1663491027
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -12421,6 +12353,7 @@ Transform:
   - {fileID: 963474674}
   - {fileID: 437850952}
   - {fileID: 1663491025}
+  - {fileID: 2088002276}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!114 &1912899462
@@ -12447,8 +12380,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46d75a2a60c4e3545917dc4ca674730f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentState: 
   path: {fileID: 1263776436}
+  currentState: 
+  sightRange: 20
+  fieldOfView: 85
+  eyeHeight: 0.6
+  bulletSpawner: {fileID: 2088002276}
+  bulletSpawnRate: 1.67
 --- !u!195 &1912899464
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -13480,6 +13418,37 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &2088002275
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2088002276}
+  m_Layer: 0
+  m_Name: BulletSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2088002276
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2088002275}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.28, y: 0, z: 0.656}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1912899461}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &63487915395289814
 MonoBehaviour:
   m_ObjectHideFlags: 0
