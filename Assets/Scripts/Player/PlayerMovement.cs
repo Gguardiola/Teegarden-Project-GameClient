@@ -12,6 +12,10 @@ public class PlayerMovement : MonoBehaviour
     private bool crouching = false;
     private bool sprinting = false;
     private float crouchTimer = 0f;
+    public GameObject itemHolder;
+    private float bobTimer = 0f;
+    private Vector3 defaultArmPos;
+    private float armBobSpeed = 6f;
     
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -21,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
         speed = PlayerConfig.Instance.speed;
         jumpHeight = PlayerConfig.Instance.jumpHeight;
         gravity = WorldConfig.Instance.gravity;
+        defaultArmPos = itemHolder.transform.localPosition;
     }
 
     // Update is called once per frame
@@ -59,8 +64,26 @@ public class PlayerMovement : MonoBehaviour
         if (isGrounded && playerVelocity.y < 0)
         {
             playerVelocity.y = -2f;
+            itemHolder.transform.localPosition = Vector3.Lerp(itemHolder.transform.localPosition, new Vector3(0, -0.7f, 0), Time.deltaTime * 5);
+
+            itemHolder.transform.localPosition = Vector3.Lerp(itemHolder.transform.localPosition, new Vector3(0, -0.3f, 0), Time.deltaTime * 5);
         }
         controller.Move(playerVelocity * Time.deltaTime);
+
+        if (isGrounded && input != Vector2.zero)
+        {
+            bobTimer += Time.deltaTime * armBobSpeed;
+            float bobX = Mathf.Sin(bobTimer) * 0.05f;
+            float bobY = Mathf.Cos(bobTimer * 2) * 0.05f;
+
+            itemHolder.transform.localPosition = defaultArmPos + new Vector3(bobX, bobY, 0f);
+        }
+        else
+        {
+            bobTimer = 0f;
+
+            itemHolder.transform.localPosition = Vector3.Lerp(itemHolder.transform.localPosition, defaultArmPos, Time.deltaTime *  5f);
+        }
     }
 
     public void Jump()
@@ -69,6 +92,7 @@ public class PlayerMovement : MonoBehaviour
         {
             playerVelocity.y = Mathf.Sqrt(jumpHeight * -3.0f * gravity);
         }
+
     }
 
     public void Crouch()
@@ -84,11 +108,16 @@ public class PlayerMovement : MonoBehaviour
         if (sprinting)
         {
             speed = 8f;
+            armBobSpeed = 10f;
+
         }
         else
         {
             speed = 5f;
+            armBobSpeed = 6f;
+
         }
     }
+
 }
 

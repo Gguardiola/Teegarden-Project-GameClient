@@ -10,6 +10,7 @@ public class InputManager : MonoBehaviour
     public PlayerInput.DEBUGActions debug;
     private PlayerMovement movement;
     private PlayerLook look;
+    public Gun gun;
     
     void Awake()
     {
@@ -21,6 +22,8 @@ public class InputManager : MonoBehaviour
         onFoot.Jump.performed += ctx => movement.Jump();
         onFoot.Crouch.performed += ctx => movement.Crouch();
         onFoot.Sprint.performed += ctx => movement.Sprint();
+        onFoot.Shoot.performed += ctx => gun.TryShoot();
+        onFoot.Reload.performed += ctx => gun.TryReload();
 
     }
 
@@ -33,11 +36,6 @@ public class InputManager : MonoBehaviour
     private void LateUpdate()
     {
         look.ProcessLook(onFoot.Look.ReadValue<Vector2>());
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
     
     private void OnEnable()
