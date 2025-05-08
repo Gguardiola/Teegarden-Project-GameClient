@@ -13,12 +13,21 @@ public class PlayerUI : MonoBehaviour
     private Sprite outerCrosshair;
     [SerializeField]
     private GameObject crosshair;
+    [HideInInspector]
+    public Color defaultTextColor;
+    public Color PromptTextColor
+    {
+        get => promptText.color;
+        set => promptText.color = value;
+    }    
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false; 
+        defaultTextColor = promptText.color;
+        PromptTextColor = defaultTextColor;
     }
 
     // Update is called once per frame

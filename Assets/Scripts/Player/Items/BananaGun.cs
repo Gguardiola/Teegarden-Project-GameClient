@@ -48,6 +48,15 @@ public class Bananagun : Gun
         if(hit.collider != null)
         {
             BulletHitVFX(hit);
+            //if the hit object has the enemy tag, apply damage
+            if (hit.collider.CompareTag("Enemy"))
+            {
+                EnemyAI enemyAI = hit.collider.GetComponent<EnemyAI>();
+                if (enemyAI != null)
+                {
+                    enemyAI.TakeDamage(gunData.damage);
+                }
+            }
         }
     }
 

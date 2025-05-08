@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags: []
+  tags:
+  - Enemy
+  - CombatAction
+  - CombatMenuButton
+  - AttackAbility
+  - ShowPopup
+  - ClosePopup
   layers:
   - Default
   - TransparentFX
@@ -12,7 +18,7 @@ TagManager:
   - Water
   - UI
   - Interactable
-  - 
+  - Enemy
   - Gun
   - 
   - 
