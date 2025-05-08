@@ -9,6 +9,7 @@ public class EnemyAI : MonoBehaviour
     private GameObject player;
     private NavMeshAgent agent;
     private Vector3 lastKnownPlayerPosition;
+    public float health = 100f;
     public GameObject Player
     {
         get => player;
@@ -53,6 +54,7 @@ public class EnemyAI : MonoBehaviour
     void Update()
     {
         CanSeePlayer();
+        CheckHealth();
         currentState = enemyStateMachine.activeState.ToString();
     }
 
@@ -81,5 +83,20 @@ public class EnemyAI : MonoBehaviour
         }
 
         return false;
+    }
+    
+    public void CheckHealth()
+    {
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
+    
+    public void TakeDamage(float damage)
+    {
+        health -= damage;
+        Debug.Log("ENEMY HEALTH: " + health);
+        CheckHealth();
     }
 }

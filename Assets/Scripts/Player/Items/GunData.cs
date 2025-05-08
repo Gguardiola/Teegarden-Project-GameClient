@@ -15,5 +15,6 @@ public class GunData : ScriptableObject
     public float resetRecoilSpeed;
     public GameObject bulletTrailPrefab;
     public float bulletSpeed;
+    public float damage;
 
 }

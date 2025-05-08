@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab8fda2282ee4fb89630a647865d91df, type: 3}
   m_Name: PlayerConfig
   m_EditorClassIdentifier: 
-  maxHealth: 200
+  maxHealth: 100
   speed: 5
-  jumpHeight: 1
+  jumpHeight: 1.5
   criticalHealth: 50
   interactionDistance: 3
   xSensitivity: 30

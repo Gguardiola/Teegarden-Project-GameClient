@@ -11,6 +11,7 @@ public class PatrolState : BaseState
 
     public override void Perform()
     {
+        CheckHealth();
         PatrolCycle();
         if (enemyAI.CanSeePlayer())
         {

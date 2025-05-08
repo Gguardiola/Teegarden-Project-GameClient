@@ -15,12 +15,13 @@ public class PlayerInteract : MonoBehaviour
         cam = GetComponent<PlayerLook>().cam;
         playerUI = GetComponent<PlayerUI>();
         inputManager = GetComponent<InputManager>();
-        distance = PlayerConfig.Instance.interactionDistance;
+        distance = PlayerConfig.Instance.interactionDistance; 
     }
 
     // Update is called once per frame
     void Update()
     {
+        playerUI.PromptTextColor = playerUI.defaultTextColor;
         playerUI.UpdateText(string.Empty);   
         Ray ray = new Ray(cam.transform.position, cam.transform.forward);
         Debug.DrawRay(ray.origin, ray.direction * distance, Color.red);
@@ -31,6 +32,7 @@ public class PlayerInteract : MonoBehaviour
             {
                 Interactable interactable = hitInfo.collider.GetComponent<Interactable>(); 
                 playerUI.UpdateText(interactable.promptMessage);
+                playerUI.PromptTextColor = interactable.PromptTextColor;
                 if (inputManager.onFoot.Interact.triggered)
                 {
                     interactable.BaseInteract();
