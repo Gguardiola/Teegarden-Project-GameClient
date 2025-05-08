@@ -12,8 +12,7 @@ public abstract class Gun : MonoBehaviour
     private Vector3 targetNotReadyPosition = new Vector3(18f, 0, 0);
     private Vector3 startGunRotation;
     private Vector3 startGunPosition;
-    private bool isReloading = false;
-    private bool isRecoling = false;
+    private bool isReloading = false; 
     private float nextTimeToFire = 0f;
     public Transform gunMuzzle;
     public GameObject bulletHitParticlePrefab;

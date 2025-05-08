@@ -17,6 +17,7 @@ public class AttackState : BaseState
 
     public override void Perform()
     {
+        CheckHealth();
         if (enemyAI.CanSeePlayer())
         {
             losePlayerTimer = 0;

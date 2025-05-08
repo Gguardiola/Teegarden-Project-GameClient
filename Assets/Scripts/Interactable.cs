@@ -2,10 +2,11 @@ using UnityEngine;
 
 public abstract class Interactable : MonoBehaviour
 {
-    // sets or unsetts interactive state
     public bool useEvents;
     [SerializeField]
     public string promptMessage;
+    [HideInInspector]
+    public Color PromptTextColor = Color.white;
 
     public void BaseInteract()
     {
