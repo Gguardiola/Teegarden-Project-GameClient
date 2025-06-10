@@ -11,6 +11,7 @@ public class CombatManager : MonoBehaviour
     public Camera sceneCamera;
     public Action currentAction;
     public EnemyDecisionMaker enemyDecisionMaker;
+    private TurnResolver turnResolver;
     [Header("Combat stats")] 
     public String lastActionMessage = ". . .";
     public bool isPlayerTurn = true;
@@ -33,7 +34,6 @@ public class CombatManager : MonoBehaviour
     public GameObject PlayerAvatarModel;
     public GameObject EnemyAvatarModel;
     public ParticleSystem playerShieldParticleSystem;
-    private TurnResolver turnResolver;
     private CombatOverButton combatOverButtonComponent;
     [HideInInspector]
     public Avatar playerAvatar;
@@ -140,7 +140,6 @@ public class CombatManager : MonoBehaviour
             decisionReady = true;
         });
 
-        // Espera hasta que la decisión esté lista
         yield return new WaitUntil(() => decisionReady);
 
         Debug.Log("Enemy action decided: " + decidedAction.name);
