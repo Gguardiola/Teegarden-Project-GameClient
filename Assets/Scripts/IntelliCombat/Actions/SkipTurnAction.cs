@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class SkipTurnAction : Action
 {
+    [SerializeField]
+    private float regenerationAmount = 10f;
+    
+    public float GetRegenerationAmount()
+    {
+        return regenerationAmount;
+    }
     public override void CancelAction()
     {
         isActionInProgress = false;

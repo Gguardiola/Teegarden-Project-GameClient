@@ -83,14 +83,14 @@ public class TurnResolver
         {
             combatManager.playerAvatar.isShielded = true;
             combatManager.SetLastActionMessage($"You shielded yourself.");
-            combatManager.playerAvatar.UseEnergy(10);
+            combatManager.playerAvatar.UseEnergy(action.GetEnergyCost());
         }
         else
         {
             Debug.Log("Enemy is shielding itself");
             combatManager.enemyAvatar.isShielded = true;
             combatManager.SetLastActionMessage($"The enemy shielded itself.");
-            combatManager.enemyAvatar.UseEnergy(10);
+            combatManager.enemyAvatar.UseEnergy(action.GetEnergyCost());
 
         }
         
@@ -103,12 +103,12 @@ public class TurnResolver
         if (combatManager.isPlayerTurn)
         {
             combatManager.SetLastActionMessage("You skipped your turn. Recovering energy...");
-            combatManager.playerAvatar.RegenerateEnergy(10);
+            combatManager.playerAvatar.RegenerateEnergy(action.GetRegenerationAmount());
         }
         else
         {
             combatManager.SetLastActionMessage("The enemy skipped its turn. Recovers energy...");
-            combatManager.enemyAvatar.RegenerateEnergy(10);
+            combatManager.enemyAvatar.RegenerateEnergy(action.GetRegenerationAmount());
         }
         combatManager.SetEnemyStats();
         combatManager.SetPlayerStats();

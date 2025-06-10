@@ -1835,10 +1835,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isActionInProgress: 0
-  playerAbilities:
-  - {fileID: 11400000, guid: 358f63b154ba2594789001085bbf6850, type: 2}
+  abilities:
   - {fileID: 11400000, guid: 273e963c2d7731c41bac8077ae04a8b3, type: 2}
   - {fileID: 11400000, guid: ed0878a784143114a8593446e8c922fc, type: 2}
+  - {fileID: 11400000, guid: 76e0d326a86c24f4f84b017414db5524, type: 2}
   selectedAbility: {fileID: 0}
   isAbilitySelected: 0
   AttackAbilities: {fileID: 517925677}
@@ -11850,6 +11850,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isActionInProgress: 0
+  energyCost: 10
   confirmLabel: {fileID: 1101258105}
   actionControlUI: {fileID: 74284223}
 --- !u!43 &904661011
@@ -13895,6 +13896,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isActionInProgress: 0
+  regenerationAmount: 10
   confirmLabel: {fileID: 1101258105}
   actionControlUI: {fileID: 74284223}
 --- !u!1 &1198441689
@@ -15673,6 +15675,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1370080220}
   - component: {fileID: 1370080219}
+  - component: {fileID: 1370080221}
+  - component: {fileID: 1370080223}
+  - component: {fileID: 1370080222}
   m_Layer: 0
   m_Name: EnemyDecisionMaker
   m_TagString: Untagged
@@ -15692,6 +15697,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec0e31f8e0e2431faf2da5aa01c97b32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  combatManager: {fileID: 74284220}
 --- !u!4 &1370080220
 Transform:
   m_ObjectHideFlags: 0
@@ -15707,6 +15713,53 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1370080221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1370080217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0949f40fbe2d456f97e829d90b726255, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isActionInProgress: 0
+  energyCost: 10
+--- !u!114 &1370080222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1370080217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c9b69e1cd634125a73b145b5e54b8b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isActionInProgress: 0
+  regenerationAmount: 10
+--- !u!114 &1370080223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1370080217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36d4e6a47fe6465bacaf0d26c101d9d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isActionInProgress: 0
+  abilities:
+  - {fileID: 11400000, guid: 76e0d326a86c24f4f84b017414db5524, type: 2}
+  - {fileID: 11400000, guid: c167097cb015d9b489380614197cea3d, type: 2}
+  - {fileID: 11400000, guid: 273e963c2d7731c41bac8077ae04a8b3, type: 2}
+  selectedAbility: {fileID: 0}
+  isAbilitySelected: 0
 --- !u!1 &1384229530
 GameObject:
   m_ObjectHideFlags: 0
