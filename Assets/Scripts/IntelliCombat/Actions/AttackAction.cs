@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class AttackAction : Action
 {
-    public List<AbilityData> playerAbilities = new List<AbilityData>();
+    public List<AbilityData> abilities = new List<AbilityData>();
     [HideInInspector]
     public AbilityData selectedAbility;
     [HideInInspector]

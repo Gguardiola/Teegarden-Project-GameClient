@@ -4,7 +4,13 @@ using UnityEngine;
 
 public class ShieldAction : Action
 {
-    
+    [SerializeField]
+    private float energyCost = 10f;
+
+    public float GetEnergyCost()
+    {
+        return energyCost;
+    }
     public override void CancelAction()
     {
         isActionInProgress = false;

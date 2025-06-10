@@ -105,35 +105,35 @@ public class PlayerAttackAction : AttackAction
                         GameObject abilityLabel = label.gameObject;
                         if(SelectAbilityButtons[count] != null)
                         {
-                            SelectAbilityButtons[count].GetComponent<SelectAbilityButton>().SetAbilityData(playerAbilities[count]);
+                            SelectAbilityButtons[count].GetComponent<SelectAbilityButton>().SetAbilityData(abilities[count]);
                         }
                         if (abilityLabel.GetComponent<TextMeshProUGUI>() && abilityLabel.name == "UI_AttackAbilityName")
                         {
-                            abilityLabel.GetComponent<TextMeshProUGUI>().text = playerAbilities[count].abilityName;
-                            abilityDescription.text += "- " + playerAbilities[count].abilityName;
+                            abilityLabel.GetComponent<TextMeshProUGUI>().text = abilities[count].abilityName;
+                            abilityDescription.text += "- " + abilities[count].abilityName;
                             abilityDescription.text += "\n" + "\n";
                             abilityDescription.text += "Description:\n";
-                            abilityDescription.text += playerAbilities[count].abilityDescription;
+                            abilityDescription.text += abilities[count].abilityDescription;
                             abilityDescription.text += "\n";
                             abilityDescription.text += "--------------------------\n";
                         }
                         if (abilityLabel.GetComponent<TextMeshProUGUI>() && abilityLabel.name == "UI_AttackAbilityDamageLabel")
                         {
-                            abilityLabel.GetComponent<TextMeshProUGUI>().text = "Damage: " + playerAbilities[count].damage.ToString() + "p";
-                            if (playerAbilities[count].isHealAbility)
+                            abilityLabel.GetComponent<TextMeshProUGUI>().text = "Damage: " + abilities[count].damage.ToString() + "p";
+                            if (abilities[count].isHealAbility)
                             {
                                 abilityLabel.SetActive(false);
                             }
                         }
 
-                        if (playerAbilities[count].isHealAbility && abilityLabel.GetComponent<TextMeshProUGUI>() && abilityLabel.name == "UI_AttackAbilityHealLabel")
+                        if (abilities[count].isHealAbility && abilityLabel.GetComponent<TextMeshProUGUI>() && abilityLabel.name == "UI_AttackAbilityHealLabel")
                         {
                             abilityLabel.SetActive(true);
-                            abilityLabel.GetComponent<TextMeshProUGUI>().text = "Heal: " + playerAbilities[count].healAmount.ToString() + "p";
+                            abilityLabel.GetComponent<TextMeshProUGUI>().text = "Heal: " + abilities[count].healAmount.ToString() + "p";
                         }
                         if (abilityLabel.GetComponent<TextMeshProUGUI>() && abilityLabel.name == "UI_AttackAbilityEnergyCostLabel")
                         {
-                            abilityLabel.GetComponent<TextMeshProUGUI>().text = "Cost: " + playerAbilities[count].cost.ToString() + "p";
+                            abilityLabel.GetComponent<TextMeshProUGUI>().text = "Cost: " + abilities[count].cost.ToString() + "p";
                             count++;
                         }
 
