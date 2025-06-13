@@ -66,13 +66,15 @@ public class TurnResolver
                 {
                     combatManager.playerAvatar.TakeDamage(selectedAbility.damage);
                     combatManager.enemyAvatar.UseEnergy(selectedAbility.cost);
-                    combatManager.SetLastActionMessage($"The enemy attacked you with {selectedAbility.abilityName} for {selectedAbility.damage} damage.");                 
+                    combatManager.SetLastActionMessage($"The enemy attacked you with {selectedAbility.abilityName} for {selectedAbility.damage} damage.");  
                 }
             }
         }
         
         combatManager.SetEnemyStats();
         combatManager.SetPlayerStats();
+        string currentTurn = combatManager.isPlayerTurn ? combatManager.playerAvatar.GetName() : combatManager.enemyAvatar.GetName();
+        combatManager.RecordTurnData(currentTurn, selectedAbility, !combatManager.isPlayerTurn);
         return true;
 
 
@@ -96,6 +98,9 @@ public class TurnResolver
         
         combatManager.SetEnemyStats();
         combatManager.SetPlayerStats();
+        string currentTurn = combatManager.isPlayerTurn ? combatManager.playerAvatar.GetName() : combatManager.enemyAvatar.GetName();
+        combatManager.RecordTurnData(currentTurn, "shield", !combatManager.isPlayerTurn);
+
         return true;
     }
     public bool ResolveTurn(SkipTurnAction action)
@@ -112,6 +117,8 @@ public class TurnResolver
         }
         combatManager.SetEnemyStats();
         combatManager.SetPlayerStats();
+        string currentTurn = combatManager.isPlayerTurn ? combatManager.playerAvatar.GetName() : combatManager.enemyAvatar.GetName();
+        combatManager.RecordTurnData(currentTurn, "skip", !combatManager.isPlayerTurn);
         return true;
     }
 
@@ -123,7 +130,7 @@ public class TurnResolver
             combatManager.SetTemporalLastActionMessage("NOT ENOUGH ENERGY TO PERFORM THIS ACTION!!!.");
             return false;
         }
-
+        
         return true;
     }
     
