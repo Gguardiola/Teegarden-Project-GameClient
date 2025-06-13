@@ -12,6 +12,7 @@ public class CombatManager : MonoBehaviour
     public Action currentAction;
     public EnemyDecisionMaker enemyDecisionMaker;
     private TurnResolver turnResolver;
+    private CombatLogManager combatLogManager = new();
     [Header("Combat stats")] 
     public String lastActionMessage = ". . .";
     public bool isPlayerTurn = true;
@@ -46,7 +47,7 @@ public class CombatManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Confined;
 
         playerAvatar = new Avatar();
-        enemyAvatar = new Avatar();
+        enemyAvatar = new Avatar("enemy");
         turnResolver = new TurnResolver(this);
         combatOverButtonComponent = combatOverButton.GetComponent<CombatOverButton>();
         SetPlayerStats();
@@ -61,6 +62,47 @@ public class CombatManager : MonoBehaviour
         CheckDangerHealth();
         CheckDangerEnergy();
         CheckIfEndgame();
+    }
+    
+    public void RecordTurnData(string actorName, AbilityData abilityUsed, bool isEnemy)
+    {
+        Avatar actor = isEnemy ? enemyAvatar : playerAvatar;
+        Avatar opponent = isEnemy ? playerAvatar : enemyAvatar;
+
+        combatLogManager.RecordTurn(
+            actorName,
+            abilityUsed.abilityName,
+            abilityUsed.damage,
+            abilityUsed.healAmount,
+            abilityUsed.cost,
+            actor.GetHealth(),
+            actor.GetEnergy(),
+            opponent.GetHealth(),
+            opponent.GetEnergy(),
+            isShieldAction: abilityUsed.abilityName == "shield",
+            isSkippedAction: abilityUsed.abilityName == "skip",
+            isHealingAbility: abilityUsed.isHealAbility
+        );
+    }
+    public void RecordTurnData(string actorName, string actionName, bool isEnemy)
+    {
+        Avatar actor = isEnemy ? enemyAvatar : playerAvatar;
+        Avatar opponent = isEnemy ? playerAvatar : enemyAvatar;
+
+        combatLogManager.RecordTurn(
+            actorName,
+            actionName,
+            0f,
+            0f,
+            0f,
+            actor.GetHealth(),
+            actor.GetEnergy(),
+            opponent.GetHealth(),
+            opponent.GetEnergy(),
+            isShieldAction: actionName == "shield",
+            isSkippedAction: actionName == "skip",
+            isHealingAbility: false
+        );
     }
     
     private void CheckIfEndgame()
@@ -108,7 +150,7 @@ public class CombatManager : MonoBehaviour
 
     public void HandleTurn()
     {
-        if (currentAction != null)
+        if (currentAction != null && !isCombatOver)
         {
 
             if (!currentAction.ResolveAction(turnResolver)) return;
@@ -264,6 +306,10 @@ public class CombatManager : MonoBehaviour
                 
                 if (menuButton != null && menuButton.Name == "CombatOverButton" && !popUpMessageEnabled)
                 {
+                    combatLogManager.SetWinner(playerWon ? playerAvatar.GetName(): enemyAvatar.GetName());
+                    CombatLog finalLog = combatLogManager.GetFinalLog();
+                    CombatLogUtils.SaveLogToDisk(finalLog);
+                    //StartCoroutine(CombatLogUtils.UploadLogToServer(finalLog, "http://localhost:8000/upload_log"));
                     combatOverButtonComponent.ContinueNextScene();
                 }
 

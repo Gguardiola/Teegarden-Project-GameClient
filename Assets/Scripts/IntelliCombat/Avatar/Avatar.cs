@@ -11,11 +11,21 @@ public class Avatar
     public bool isPoisoned = false;
     public bool isShielded = false;
     
+    private string name = "player";
+    
+    public Avatar(string name = "player")
+    {
+        this.name = name;
+    }
+    
     public float GetHealth() { return health; }
     public float GetMaxHealth() { return maxHealth; }
     public float GetEnergy() { return energy; }
     public float GetMaxEnergy() { return maxEnergy; }
+    public string GetName() { return name; }
+
     
+    public void SetName(string newName) => name = newName;
     public void SetHealth(int value) => health = Mathf.Clamp(value, 0, maxHealth);
     public void SetMaxHealth(int value) => maxHealth = Mathf.Clamp(value, 0, int.MaxValue);
     public void SetEnergy(int value) => energy = Mathf.Clamp(value, 0, maxEnergy);
