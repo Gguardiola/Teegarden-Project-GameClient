@@ -35,6 +35,7 @@ public class CombatManager : MonoBehaviour
     public GameObject PlayerAvatarModel;
     public GameObject EnemyAvatarModel;
     public ParticleSystem playerShieldParticleSystem;
+    public ParticleSystem enemyShieldParticleSystem;
     private CombatOverButton combatOverButtonComponent;
     [HideInInspector]
     public Avatar playerAvatar;
@@ -63,8 +64,17 @@ public class CombatManager : MonoBehaviour
         CheckDangerEnergy();
         CheckIfEndgame();
     }
+    public void SetEnemyInitialAbilities(List<AbilityData> enemyAbilities)
+    {
+        combatLogManager.SetEnemyInitialAbilities(enemyAbilities);
+    }
     
-    public void RecordTurnData(string actorName, AbilityData abilityUsed, bool isEnemy)
+    public void RecordDiscoveredPlayerAbility(AbilityData ability)
+    {
+        combatLogManager.RecordDiscoveredPlayerAbility(ability);
+    }
+    
+    public void RecordTurnData(string actorName, AbilityData abilityUsed, bool isEnemy, bool wasEffective)
     {
         Avatar actor = isEnemy ? enemyAvatar : playerAvatar;
         Avatar opponent = isEnemy ? playerAvatar : enemyAvatar;
@@ -81,10 +91,11 @@ public class CombatManager : MonoBehaviour
             opponent.GetEnergy(),
             isShieldAction: abilityUsed.abilityName == "shield",
             isSkippedAction: abilityUsed.abilityName == "skip",
-            isHealingAbility: abilityUsed.isHealAbility
+            isHealingAbility: abilityUsed.isHealAbility,
+            wasEffective: wasEffective
         );
     }
-    public void RecordTurnData(string actorName, string actionName, bool isEnemy)
+    public void RecordTurnData(string actorName, string actionName, bool isEnemy, bool wasEffective)
     {
         Avatar actor = isEnemy ? enemyAvatar : playerAvatar;
         Avatar opponent = isEnemy ? playerAvatar : enemyAvatar;
@@ -101,7 +112,8 @@ public class CombatManager : MonoBehaviour
             opponent.GetEnergy(),
             isShieldAction: actionName == "shield",
             isSkippedAction: actionName == "skip",
-            isHealingAbility: false
+            isHealingAbility: false,
+            wasEffective: wasEffective
         );
     }
     
@@ -169,7 +181,7 @@ public class CombatManager : MonoBehaviour
 
     }
 
-    private IEnumerator DEBUG_EnemyTurn()
+    private IEnumerator ActivateEnemyTurn()
     {
         Debug.Log("Enemy turn started");
 
@@ -216,7 +228,7 @@ public class CombatManager : MonoBehaviour
             actionButtons.SetActive(false);
             inActionButtons.SetActive(false);
             UpdateBuffs();
-            StartCoroutine(DEBUG_EnemyTurn());
+            StartCoroutine(ActivateEnemyTurn());
 
         }
     }
@@ -234,7 +246,16 @@ public class CombatManager : MonoBehaviour
         }
         if (enemyAvatar.isShielded && !isPlayerTurn)
         {
+            enemyShieldParticleSystem.Stop();
             enemyAvatar.isShielded = false;
+        }
+        else if(enemyAvatar.isShielded && isPlayerTurn)
+        {
+            enemyShieldParticleSystem.Play();
+        }
+        else
+        {
+            enemyShieldParticleSystem.Stop();
         }
     }
     
