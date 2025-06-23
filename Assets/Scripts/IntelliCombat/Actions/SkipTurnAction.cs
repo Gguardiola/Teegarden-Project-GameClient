@@ -5,7 +5,7 @@ using UnityEngine;
 public class SkipTurnAction : Action
 {
     [SerializeField]
-    private float regenerationAmount = 10f;
+    private float regenerationAmount = 20f;
     
     public float GetRegenerationAmount()
     {

@@ -21,6 +21,7 @@ public class TurnResolver
     public bool ResolveTurn(AttackAction action)
     {
         AbilityData selectedAbility = action.selectedAbility;
+        bool wasEffective = false;
         if (selectedAbility == null) return false;
         if (combatManager.isPlayerTurn)
         {
@@ -30,6 +31,7 @@ public class TurnResolver
                 combatManager.playerAvatar.Heal(selectedAbility.healAmount);
                 combatManager.playerAvatar.UseEnergy(selectedAbility.cost);
                 combatManager.SetLastActionMessage($"You healed yourself with {selectedAbility.abilityName} for {selectedAbility.healAmount} health.");
+                wasEffective = true;
             }
             else
             {
@@ -42,7 +44,9 @@ public class TurnResolver
                 {
                     combatManager.enemyAvatar.TakeDamage(selectedAbility.damage);
                     combatManager.playerAvatar.UseEnergy(selectedAbility.cost);
-                    combatManager.SetLastActionMessage($"You attacked the enemy with {selectedAbility.abilityName} for {selectedAbility.damage} damage.");                    
+                    combatManager.SetLastActionMessage($"You attacked the enemy with {selectedAbility.abilityName} for {selectedAbility.damage} damage.");  
+                    combatManager.RecordDiscoveredPlayerAbility(selectedAbility);
+                    wasEffective = true;
                 }
             }
         }
@@ -54,6 +58,7 @@ public class TurnResolver
                 combatManager.enemyAvatar.Heal(selectedAbility.healAmount);
                 combatManager.enemyAvatar.UseEnergy(selectedAbility.cost);
                 combatManager.SetLastActionMessage($"The enemy healed itself with {selectedAbility.abilityName} for {selectedAbility.healAmount} health.");
+                wasEffective = true;
             }
             else
             {
@@ -67,6 +72,7 @@ public class TurnResolver
                     combatManager.playerAvatar.TakeDamage(selectedAbility.damage);
                     combatManager.enemyAvatar.UseEnergy(selectedAbility.cost);
                     combatManager.SetLastActionMessage($"The enemy attacked you with {selectedAbility.abilityName} for {selectedAbility.damage} damage.");  
+                    wasEffective = true;
                 }
             }
         }
@@ -74,7 +80,7 @@ public class TurnResolver
         combatManager.SetEnemyStats();
         combatManager.SetPlayerStats();
         string currentTurn = combatManager.isPlayerTurn ? combatManager.playerAvatar.GetName() : combatManager.enemyAvatar.GetName();
-        combatManager.RecordTurnData(currentTurn, selectedAbility, !combatManager.isPlayerTurn);
+        combatManager.RecordTurnData(currentTurn, selectedAbility, !combatManager.isPlayerTurn, wasEffective);
         return true;
 
 
@@ -99,7 +105,7 @@ public class TurnResolver
         combatManager.SetEnemyStats();
         combatManager.SetPlayerStats();
         string currentTurn = combatManager.isPlayerTurn ? combatManager.playerAvatar.GetName() : combatManager.enemyAvatar.GetName();
-        combatManager.RecordTurnData(currentTurn, "shield", !combatManager.isPlayerTurn);
+        combatManager.RecordTurnData(currentTurn, "shield", !combatManager.isPlayerTurn, true);
 
         return true;
     }
@@ -118,7 +124,7 @@ public class TurnResolver
         combatManager.SetEnemyStats();
         combatManager.SetPlayerStats();
         string currentTurn = combatManager.isPlayerTurn ? combatManager.playerAvatar.GetName() : combatManager.enemyAvatar.GetName();
-        combatManager.RecordTurnData(currentTurn, "skip", !combatManager.isPlayerTurn);
+        combatManager.RecordTurnData(currentTurn, "skip", !combatManager.isPlayerTurn, true);
         return true;
     }
 

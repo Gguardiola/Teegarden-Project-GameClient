@@ -12,6 +12,8 @@ public class TurnLogEntry
     public float opponentHP;
     public float opponentEnergy;
     public bool isShieldAction;
-    public bool isSKippedAction;
+    public bool isSkippedAction;
     public bool isHealingAbility;
+    public bool wasEffective;
+
 }
