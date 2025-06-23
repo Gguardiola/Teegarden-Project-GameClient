@@ -17,6 +17,6 @@ MonoBehaviour:
   damage: 0
   cost: 30
   isHealAbility: 1
-  healAmount: 20
+  healAmount: 10
   isShieldIgnored: 0
   isPoisonLike: 0
