@@ -12,17 +12,16 @@ namespace IntelliCombat.MenuButtons
             isPlayerWinner = isWinner;
         }
         
-        //change to the next scene depnding on the winner
         public void ContinueNextScene()
         {
             if (isPlayerWinner)
             {
-                //load next scene level
-                UnityEngine.SceneManagement.SceneManager.LoadScene("SampleScene");
+                //UnityEngine.SceneManagement.SceneManager.LoadScene("SampleScene");
+                UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
+
             }
             else
             {
-                //back to main menu WIP
                 UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
             }
         }
