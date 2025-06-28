@@ -89,12 +89,14 @@ public class TurnResolver
     {
         if (combatManager.isPlayerTurn)
         {
+            if (!IsAffordable(action, combatManager.playerAvatar)) return false;
             combatManager.playerAvatar.isShielded = true;
             combatManager.SetLastActionMessage($"You shielded yourself.");
             combatManager.playerAvatar.UseEnergy(action.GetEnergyCost());
         }
         else
         {
+            if (!IsAffordable(action, combatManager.enemyAvatar)) return false;
             Debug.Log("Enemy is shielding itself");
             combatManager.enemyAvatar.isShielded = true;
             combatManager.SetLastActionMessage($"The enemy shielded itself.");
@@ -132,6 +134,16 @@ public class TurnResolver
     {
         AbilityData selectedAbility = action.selectedAbility;
         if (currentAvatar.GetEnergy() < selectedAbility.cost)
+        {
+            combatManager.SetTemporalLastActionMessage("NOT ENOUGH ENERGY TO PERFORM THIS ACTION!!!.");
+            return false;
+        }
+        
+        return true;
+    }
+    private bool IsAffordable(ShieldAction action, Avatar currentAvatar)
+    {
+        if (currentAvatar.GetEnergy() < action.GetEnergyCost())
         {
             combatManager.SetTemporalLastActionMessage("NOT ENOUGH ENERGY TO PERFORM THIS ACTION!!!.");
             return false;

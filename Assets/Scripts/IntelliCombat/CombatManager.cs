@@ -301,6 +301,8 @@ public class CombatManager : MonoBehaviour
     }
     public void Click()
     {
+        if (InputBlocker.IsBlocked) return;
+
         Vector3 mousePos = Input.mousePosition;
         if (sceneCamera != null)
         {
@@ -347,10 +349,11 @@ public class CombatManager : MonoBehaviour
             }
             if (raycastHit && hit.collider != null && hit.collider.CompareTag("ClosePopup"))
             {
-                Debug.Log("Close Popup");
                 popUpMessageEnabled = false;
                 popUpMessageBox.SetActive(false);
             }
+            InputBlocker.BlockForSeconds(0.3f);
+
         }
 
     }
