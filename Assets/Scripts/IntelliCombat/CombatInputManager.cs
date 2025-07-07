@@ -14,6 +14,7 @@ public class CombatInputManager : MonoBehaviour
     public PlayerInput.DEBUGActions debug;
     private CombatManager combatManager;
     private PauseMenu pauseMenu;
+    public APIClientHandler apiClientHandler;
     void Awake()
     {
         playerInput = new PlayerInput();
@@ -29,8 +30,32 @@ public class CombatInputManager : MonoBehaviour
 
     private void TogglePauseMenu()
     {
-        CheckIfPaused();
         pauseMenu.TogglePauseMenu();
+        CheckIfPaused();
+    }
+    
+    void Update()
+    {
+        CheckIfAPIError();
+    }
+    
+    private void CheckIfAPIError()
+    {
+        if (apiClientHandler != null && apiClientHandler.isError)
+        {
+            ui.Disable();
+            menu.Disable();
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
+            Time.timeScale = 0f;
+        }
+        else if (!apiClientHandler.isError && !pauseMenu.IsPaused())
+        {
+            ui.Enable();
+            menu.Enable();
+            Time.timeScale = 1f;
+
+        }
     }
     
     private void CheckIfPaused()
