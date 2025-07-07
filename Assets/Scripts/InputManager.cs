@@ -13,6 +13,7 @@ public class InputManager : MonoBehaviour
     private PlayerLook look;
     public Gun gun;
     public PauseMenu pauseMenu;
+    public APIClientHandler apiClientHandler;
     
     void Awake()
     {
@@ -29,6 +30,32 @@ public class InputManager : MonoBehaviour
         onFoot.Reload.performed += ctx => gun.TryReload();
         menu.Pause.performed += ctx => TogglePauseMenu();
 
+    }
+
+    void Update()
+    {
+        CheckIfAPIError();
+    }
+    
+    private void CheckIfAPIError()
+    {
+        if (apiClientHandler != null && apiClientHandler.isError)
+        {
+            onFoot.Disable();
+            menu.Disable();
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
+            Time.timeScale = 0f;
+        }
+        else if (!apiClientHandler.isError && !pauseMenu.IsPaused())
+        {
+            onFoot.Enable();
+            menu.Enable();
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            Time.timeScale = 1f;
+
+        }
     }
     
     public void TogglePauseMenu()
