@@ -8,7 +8,7 @@ public class APIClient : MonoBehaviour
     private string _baseUrl = "http://localhost";
     private string _accessToken;
     public bool IsLoggedIn = false;
-
+    public APIClientHandler apiClientHandler;
     public IEnumerator Login(string username, string password)
     {
         WWWForm form = new WWWForm();
@@ -28,6 +28,7 @@ public class APIClient : MonoBehaviour
         else
         {
             Debug.LogError("Login failed: " + www.error);
+            ThrowError(www.error);
         }
     }
 
@@ -49,6 +50,15 @@ public class APIClient : MonoBehaviour
         else
         {
             Debug.LogError("Combat log error: " + www.error);
+            ThrowError(www.error);
+        }
+    }
+    
+    private void ThrowError(string errMsg)
+    {
+        if (apiClientHandler != null)
+        {
+            apiClientHandler.ShowErrorPopUp(errMsg);
         }
     }
 
