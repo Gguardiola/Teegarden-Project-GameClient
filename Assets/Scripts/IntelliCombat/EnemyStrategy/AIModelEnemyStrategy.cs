@@ -28,7 +28,17 @@ public class AIModelEnemyStrategy : MonoBehaviour, IEnemyStrategy
         yield return new WaitForSeconds(1f);
 
         float[] stateVector = StateEncoder.Encode(combatManager);
-        float[] qValues = AIModelLoader.GetIntellicombatModel().PredictRawQValues(stateVector);
+        Debug.Log("STATE: [" + string.Join(",", stateVector) + "]");
+        float[] normalized = new float[stateVector.Length];
+        for (int i = 0; i < stateVector.Length; i++)
+        {
+            normalized[i] = stateVector[i] / 100f;
+        }
+
+        Debug.Log("Normalized: [" + string.Join(",", normalized) + "]");
+
+        float[] qValues = AIModelLoader.GetIntellicombatModel().PredictRawQValues(normalized);
+        //float[] qValues = AIModelLoader.GetIntellicombatModel().PredictRawQValues(stateVector);
         
         int[] orderedIndices = Enumerable.Range(0, qValues.Length)
             .OrderByDescending(i => qValues[i])
@@ -48,7 +58,7 @@ public class AIModelEnemyStrategy : MonoBehaviour, IEnemyStrategy
         
         if (selectedAction == null)
         {
-            Debug.LogWarning("Ninguna acción válida encontrada. Usando SkipTurn.");
+            Debug.LogWarning("Invalid actions, using default SkipTurnAction.");
             selectedAction = skipTurnAction;
         }
 
