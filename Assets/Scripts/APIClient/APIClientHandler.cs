@@ -53,5 +53,3 @@ public class APIClientHandler : MonoBehaviour
         }
 
 }
-
-//TODO: que el modelo de AI lo cargue en resources, mirar como guardar el modelo AI (blob?)

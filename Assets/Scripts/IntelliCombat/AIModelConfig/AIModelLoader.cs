@@ -8,7 +8,7 @@ public static class AIModelLoader
     {
         if (modelInstance == null)
         {
-            modelInstance = new LocalOnnxModel("AIModels/intellicombat_model_ready"); //TODO: que se intente bajar el ultimo modelo, si coincide, estara actualizado a la ultima, sino, cambiar.
+            modelInstance = new LocalOnnxModel("AIModels/intellicombat_model_ready_latest");
         }
 
         return modelInstance;

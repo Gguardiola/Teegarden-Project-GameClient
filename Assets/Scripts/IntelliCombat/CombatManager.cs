@@ -332,6 +332,7 @@ public class CombatManager : MonoBehaviour
                     combatLogManager.SetWinner(playerWon ? playerAvatar.GetName(): enemyAvatar.GetName());
                     CombatLog finalLog = combatLogManager.GetFinalLog();
                     CombatLogUtils.SaveLogToDisk(finalLog);
+                    //TODO: enviar mediante APIClient!
                     //StartCoroutine(CombatLogUtils.UploadLogToServer(finalLog, "http://localhost:8000/upload_log"));
                     combatOverButtonComponent.ContinueNextScene();
                 }

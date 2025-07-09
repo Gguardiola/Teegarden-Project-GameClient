@@ -1,44 +1,83 @@
-using Unity.Barracuda;
+using System.Collections.Generic;
+using System.IO;
+using Microsoft.ML.OnnxRuntime;
+using Microsoft.ML.OnnxRuntime.Tensors;
 using UnityEngine;
 
 public class LocalOnnxModel
 {
-    private NNModel modelAsset;
-    private IWorker worker;
+    private InferenceSession session;
 
-    public bool IsReady => worker != null;
+    public bool IsReady => session != null;
 
-    public LocalOnnxModel(string modelPath)
+    public LocalOnnxModel(string modelRelativePath)
     {
-        LoadModel(modelPath);
+        LoadModel(modelRelativePath);
     }
 
-    private void LoadModel(string modelPath)
+    private void LoadModel(string modelRelativePath)
     {
-        modelAsset = Resources.Load<NNModel>(modelPath);
+        string modelPath = Path.Combine(Application.persistentDataPath, modelRelativePath + ".onnx");
 
-        if (modelAsset == null)
+        if (!File.Exists(modelPath))
         {
-            Debug.LogError("ONNX model not found at Resources/" + modelPath);
+            Debug.LogError($"ONNX model not found at: {modelPath}");
             return;
         }
 
-        var model = ModelLoader.Load(modelAsset);
-        worker = WorkerFactory.CreateWorker(WorkerFactory.Type.Auto, model);
+        session = new InferenceSession(modelPath);
+        Debug.Log($"ONNX model loaded from: {modelPath}");
+
+        foreach (var kvp in session.InputMetadata)
+        {
+            Debug.Log($"[INPUT META] Name: {kvp.Key}  Shape: [{string.Join(",", kvp.Value.Dimensions)}]  Type: {kvp.Value.ElementType}");
+        }
+
+        foreach (var kvp in session.OutputMetadata)
+        {
+            Debug.Log($"[OUTPUT META] Name: {kvp.Key}  Shape: [{string.Join(",", kvp.Value.Dimensions)}]  Type: {kvp.Value.ElementType}");
+        }
     }
     
     public float[] PredictRawQValues(float[] input)
     {
-        // Asumiendo que ya tienes tu tensor y worker configurado
-        Tensor inputTensor = new Tensor(1, input.Length, input);
-        worker.Execute(inputTensor);
-        Tensor output = worker.PeekOutput();  // Asume solo un output
+        if (session == null)
+        {
+            Debug.LogError("ONNX Session is not ready!");
+            return new float[0];
+        }
 
-        float[] qValues = output.ToReadOnlyArray();
-        inputTensor.Dispose();
-        output.Dispose();
+        var inputTensor = new DenseTensor<float>(new[] { 1, input.Length });
+        for (int i = 0; i < input.Length; i++)
+        {
+            inputTensor[0, i] = input[i];
+        }
 
-        return qValues;
+        var inputs = new List<NamedOnnxValue>
+        {
+            NamedOnnxValue.CreateFromTensor("input_1", inputTensor)
+        };
+
+        using IDisposableReadOnlyCollection<DisposableNamedOnnxValue> results = session.Run(inputs);
+
+        foreach (var r in results)
+        {
+            if (r.Name == "output")
+            {
+                var outputTensor = r.AsTensor<float>();
+
+                float[] qValues = new float[outputTensor.Length];
+                int idx = 0;
+                foreach (var v in outputTensor)
+                {
+                    qValues[idx++] = v;
+                }
+
+                return qValues;
+            }
+        }
+
+        Debug.LogError("ONNX output not found!");
+        return new float[0];
     }
-
 }
