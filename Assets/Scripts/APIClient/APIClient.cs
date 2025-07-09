@@ -1,4 +1,5 @@
 using System.Collections;
+using System.IO;
 using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -24,6 +25,7 @@ public class APIClient : MonoBehaviour
             Debug.Log("Login response: " + response);
             _accessToken = JsonUtility.FromJson<TokenResponse>(response).access_token;
             IsLoggedIn = true;
+            StartCoroutine(DownloadLatestModel());
         }
         else
         {
@@ -54,6 +56,49 @@ public class APIClient : MonoBehaviour
         }
     }
     
+    IEnumerator DownloadLatestModel()
+    {
+        UnityWebRequest request = UnityWebRequest.Get(_baseUrl + "/model?version=latest");
+        request.SetRequestHeader("Authorization", $"Bearer {_accessToken}");
+        request.SetRequestHeader("Accept", "application/json"); 
+        yield return request.SendWebRequest();
+
+        if (request.result != UnityWebRequest.Result.Success)
+        {
+            Debug.LogError("Failed to get presigned URL: " + request.error);
+            yield break;
+        }
+
+        string json = request.downloadHandler.text;
+        string downloadUrl = JsonUtility.FromJson<ModelResponse>(json).download_url;
+
+        UnityWebRequest fileRequest = UnityWebRequest.Get(downloadUrl);
+        yield return fileRequest.SendWebRequest();
+
+        if (fileRequest.result != UnityWebRequest.Result.Success)
+        {
+            Debug.LogError("Failed to download model: " + fileRequest.error);
+            yield break;
+        }
+
+        byte[] data = fileRequest.downloadHandler.data;
+        string folder = Path.Combine(Application.persistentDataPath, "AIModels");
+        if (!Directory.Exists(folder))
+        {
+            Directory.CreateDirectory(folder);
+        }
+        string savePath = Path.Combine(folder, "intellicombat_model_ready_latest.onnx");
+        File.WriteAllBytes(savePath, data);
+
+        Debug.Log("Model downloaded to: " + savePath);
+    }
+
+    [System.Serializable]
+    public class ModelResponse
+    {
+        public string download_url;
+    }
+    
     private void ThrowError(string errMsg)
     {
         if (apiClientHandler != null)
@@ -67,4 +112,5 @@ public class APIClient : MonoBehaviour
     {
         public string access_token;
     }
+    
 }

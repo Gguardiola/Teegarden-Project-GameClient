@@ -13,10 +13,12 @@ public class EnemyDecisionMaker : MonoBehaviour
 
         if (AIModelLoader.GetIntellicombatModel().IsReady)
         {
+            Debug.Log("AI Model is ready, using AIModelEnemyStrategy.");
             enemyStrategy = model;
         }
         else
         {
+            Debug.Log("AI Model is not ready, using HeuristicEnemyStrategy.");
             enemyStrategy = heuristic;
         }
     }
