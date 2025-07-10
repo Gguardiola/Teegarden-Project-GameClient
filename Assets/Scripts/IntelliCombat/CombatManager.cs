@@ -13,6 +13,7 @@ public class CombatManager : MonoBehaviour
     public EnemyDecisionMaker enemyDecisionMaker;
     private TurnResolver turnResolver;
     private CombatLogManager combatLogManager = new();
+    public APIClient apiclient;
     [Header("Combat stats")] 
     public String lastActionMessage = ". . .";
     public bool isPlayerTurn = true;
@@ -331,10 +332,9 @@ public class CombatManager : MonoBehaviour
                 {
                     combatLogManager.SetWinner(playerWon ? playerAvatar.GetName(): enemyAvatar.GetName());
                     CombatLog finalLog = combatLogManager.GetFinalLog();
-                    CombatLogUtils.SaveLogToDisk(finalLog);
-                    //TODO: enviar mediante APIClient!
-                    //StartCoroutine(CombatLogUtils.UploadLogToServer(finalLog, "http://localhost:8000/upload_log"));
-                    combatOverButtonComponent.ContinueNextScene();
+                   // CombatLogUtils.SaveLogToDisk(finalLog);
+                    string jsonedLog = JsonUtility.ToJson(finalLog, true);
+                    StartCoroutine(PostLogAndContinue(jsonedLog));
                 }
 
                 if (menuButton != null && menuButton.Name == "SelectAbilityButton" && !popUpMessageEnabled)
@@ -398,5 +398,11 @@ public class CombatManager : MonoBehaviour
         {
             enemyHealthText.color = new Color32(27, 190, 24, 212);
         }
+    }
+    
+    private IEnumerator PostLogAndContinue(string log)
+    {
+        yield return StartCoroutine(apiclient.PostCombatLog(log));
+        combatOverButtonComponent.ContinueNextScene();
     }
 }
