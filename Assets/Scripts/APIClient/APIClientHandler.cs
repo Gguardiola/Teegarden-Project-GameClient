@@ -15,10 +15,6 @@ public class APIClientHandler : MonoBehaviour
                 if (apiclient != null)
                 {
                         StartCoroutine(apiclient.Login("local_debug_player", "password123")); //TODO: hacer que cargue desde un fichero, como su fuese uuid de la copia del juego...
-                        if (apiclient.IsLoggedIn)
-                        {
-                                StartCoroutine(apiclient.PostCombatLog(jsonPayload));  
-                        }
                 }
         }
 
