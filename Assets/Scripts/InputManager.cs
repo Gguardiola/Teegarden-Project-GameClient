@@ -14,6 +14,7 @@ public class InputManager : MonoBehaviour
     public Gun gun;
     public PauseMenu pauseMenu;
     public APIClientHandler apiClientHandler;
+    public PlayerHealth playerHealth;
     
     void Awake()
     {
@@ -34,10 +35,10 @@ public class InputManager : MonoBehaviour
 
     void Update()
     {
-        CheckIfAPIError();
+        CheckFreezeConditions();
     }
     
-    private void CheckIfAPIError()
+    private void CheckFreezeConditions()
     {
         if (apiClientHandler != null && apiClientHandler.isError)
         {
@@ -55,6 +56,15 @@ public class InputManager : MonoBehaviour
             Cursor.visible = false;
             Time.timeScale = 1f;
 
+        }
+
+        if (playerHealth != null && playerHealth.IsDead && !pauseMenu.IsPaused())
+        {
+            onFoot.Disable();
+            menu.Disable();
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
+            Time.timeScale = 0f;
         }
     }
     
