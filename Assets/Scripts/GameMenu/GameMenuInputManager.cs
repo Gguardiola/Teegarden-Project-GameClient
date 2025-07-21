@@ -11,6 +11,9 @@ public class GameMenuInputManager : MonoBehaviour
     void Awake()
     {
         playerInput = new PlayerInput();
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
+        Time.timeScale = 1f;
         ui = playerInput.UI;
         ui.Click.performed += ctx => Click();
 

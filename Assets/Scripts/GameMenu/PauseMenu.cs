@@ -40,8 +40,9 @@ public class PauseMenu : MonoBehaviour
     
     public void AbandonGame()
     {
-        SceneManager.LoadScene("MainMenu"); //TODO: logica de abandonament
         ResumeGame();
+        SceneManager.LoadScene("MainMenu"); //TODO: logica de abandonament
+        
         
     }
     
