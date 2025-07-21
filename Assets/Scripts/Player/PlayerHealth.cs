@@ -12,6 +12,10 @@ public class PlayerHealth : MonoBehaviour
     public Image frontHealthBar;
     public Image backHealthBar;
     private float lerpTimer;
+    public bool IsDead
+    {
+        get { return hp <= 0; }
+    }
 
     [Header("Player overlay")] 
     public Image overlay;
@@ -19,6 +23,7 @@ public class PlayerHealth : MonoBehaviour
     private float overlayFadeSpeed = 5f;
     private float overlayFadeDuration;
     private float damageAmountToAlpha;
+    public GameObject UIgameOverScreen;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -96,7 +101,7 @@ public class PlayerHealth : MonoBehaviour
 
         if (hp <= 0)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            UIgameOverScreen.SetActive(true);
         }
         
     }
