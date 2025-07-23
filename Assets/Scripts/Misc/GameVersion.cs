@@ -17,9 +17,5 @@ public class GameVersion : MonoBehaviour
         {
             versionText.text = $"v{version}";
         }
-        else
-        {
-            Debug.LogError("GameVersion: TextMeshProUGUI component not found.");
-        }
     }
 }

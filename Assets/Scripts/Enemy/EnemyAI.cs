@@ -6,23 +6,23 @@ public class EnemyAI : MonoBehaviour
     public PatrolState patrolState;
     public AttackState attackState;
     public SearchState searchState;
-    private GameObject player;
-    private NavMeshAgent agent;
-    private Vector3 lastKnownPlayerPosition;
+    private GameObject _player;
+    private NavMeshAgent _agent;
+    private Vector3 _lastKnownPlayerPosition;
     public float health = 100f;
-    public GameObject Player
+    public GameObject player
     {
-        get => player;
+        get => _player;
     }
-    public NavMeshAgent Agent
+    public NavMeshAgent agent
     {
-        get => agent;
+        get => _agent;
     }
 
-    public Vector3 LastKnownPlayerPosition
+    public Vector3 lastKnownPlayerPosition
     {
-        get => lastKnownPlayerPosition;
-        set => lastKnownPlayerPosition = value;
+        get => _lastKnownPlayerPosition;
+        set => _lastKnownPlayerPosition = value;
     }
     public NavigationPath path;
     [SerializeField] 
@@ -35,7 +35,7 @@ public class EnemyAI : MonoBehaviour
     [Header("Attack values")] public Transform bulletSpawner;
 
     [Range(0.1f, 10f)] public float bulletSpawnRate;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     void Start()
     {
         patrolState = new PatrolState();
@@ -43,14 +43,13 @@ public class EnemyAI : MonoBehaviour
         searchState = new SearchState();
         
         enemyStateMachine = GetComponent<EnemyStateMachine>();
-        agent = GetComponent<NavMeshAgent>();
+        _agent = GetComponent<NavMeshAgent>();
         
         enemyStateMachine.Initialize(patrolState);
         
-        player = GameObject.FindGameObjectWithTag("Player");
+        _player = GameObject.FindGameObjectWithTag("Player");
     }
 
-    // Update is called once per frame
     void Update()
     {
         CanSeePlayer();
@@ -60,11 +59,11 @@ public class EnemyAI : MonoBehaviour
 
     public bool CanSeePlayer()
     {
-        if (player != null)
+        if (_player != null)
         {
-            if (Vector3.Distance(transform.position, player.transform.position) < sightRange)
+            if (Vector3.Distance(transform.position, _player.transform.position) < sightRange)
             {
-                Vector3 targetDirection = player.transform.position - transform.position - Vector3.up * eyeHeight;
+                Vector3 targetDirection = _player.transform.position - transform.position - Vector3.up * eyeHeight;
                 float angleToPlayer = Vector3.Angle(targetDirection, transform.forward);
                 if (angleToPlayer >= -fieldOfView && angleToPlayer <= fieldOfView)
                 {
@@ -72,7 +71,7 @@ public class EnemyAI : MonoBehaviour
                     RaycastHit hitInfo = new RaycastHit();
                     if (Physics.Raycast(ray, out hitInfo, sightRange))
                     {
-                        if (hitInfo.transform.gameObject == player)
+                        if (hitInfo.transform.gameObject == _player)
                         {
                             Debug.DrawRay(ray.origin, ray.direction * sightRange, Color.red);
                             return true;
@@ -96,7 +95,6 @@ public class EnemyAI : MonoBehaviour
     public void TakeDamage(float damage)
     {
         health -= damage;
-        Debug.Log("ENEMY HEALTH: " + health);
         CheckHealth();
     }
 }

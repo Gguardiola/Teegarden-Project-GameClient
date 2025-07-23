@@ -15,6 +15,6 @@ public class QuitGameButton : GameMenuButton
     
     public override void CleanUp()
     {
-        //do nothing
+        //Do nothing :)
     }
 }

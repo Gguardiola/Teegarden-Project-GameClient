@@ -7,8 +7,8 @@ public class APIClientHandler : MonoBehaviour
         public APIClient apiclient;
         public string jsonPayload;
         private bool loadSent = false;
-        public GameObject ErrorUIPopUp;
-        public TextMeshProUGUI ErrorText;
+        public GameObject errorUIPopUp;
+        public TextMeshProUGUI errorText;
         public bool isError = false;
         private void Start()
         {
@@ -21,7 +21,7 @@ public class APIClientHandler : MonoBehaviour
         public void CleanErrorMessage()
         {
                 isError = false;
-                ErrorUIPopUp.SetActive(false);
+                errorUIPopUp.SetActive(false);
         }
         
         void Update()
@@ -40,10 +40,10 @@ public class APIClientHandler : MonoBehaviour
         
         public void ShowErrorPopUp(string errMsg)
         {
-                if (ErrorUIPopUp != null)
+                if (errorUIPopUp != null)
                 {
-                        ErrorText.text = "ERROR: " + errMsg + ". Using local defaults.";
-                        ErrorUIPopUp.SetActive(true);
+                        errorText.text = "ERROR: " + errMsg + ". Using local defaults.";
+                        errorUIPopUp.SetActive(true);
                         isError = true;
                 }
         }

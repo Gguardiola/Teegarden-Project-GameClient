@@ -6,7 +6,7 @@ public class SearchState : BaseState
     private float searchTime = 8f;
     public override void Enter()
     {
-        enemyAI.Agent.SetDestination(enemyAI.LastKnownPlayerPosition);
+        enemyAI.agent.SetDestination(enemyAI.lastKnownPlayerPosition);
     }
 
     public override void Perform()
@@ -17,7 +17,7 @@ public class SearchState : BaseState
             enemyStateMachine.ChangeState(enemyAI.attackState);  
         }
 
-        if (enemyAI.Agent.remainingDistance <= enemyAI.Agent.stoppingDistance)
+        if (enemyAI.agent.remainingDistance <= enemyAI.agent.stoppingDistance)
         {
             searchTimer += Time.deltaTime;
             if (searchTimer > searchTime)

@@ -5,14 +5,14 @@ public class PauseMenu : MonoBehaviour
 {
 
     public GameObject pauseMenuUI;
-    private bool isPaused = false;
-    public bool IsPaused() 
+    private bool _isPaused = false;
+    public bool isPaused() 
     {
-        return isPaused;
+        return _isPaused;
     }
     public void TogglePauseMenu()
     {
-        if (isPaused)
+        if (_isPaused)
         {
             ResumeGame();
         }
@@ -24,7 +24,7 @@ public class PauseMenu : MonoBehaviour
     
     private void PauseGame()
     {
-        isPaused = true;
+        _isPaused = true;
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         
@@ -33,7 +33,7 @@ public class PauseMenu : MonoBehaviour
     }
     public void ResumeGame()
     {
-        isPaused = false;
+        _isPaused = false;
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
     }
@@ -41,7 +41,7 @@ public class PauseMenu : MonoBehaviour
     public void AbandonGame()
     {
         ResumeGame();
-        SceneManager.LoadScene("MainMenu"); //TODO: logica de abandonament
+        SceneManager.LoadScene("MainMenu"); //TODO: if necessary, gather game run stats and show it con the game over screen
         
         
     }

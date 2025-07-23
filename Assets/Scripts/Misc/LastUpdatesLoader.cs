@@ -24,7 +24,6 @@ public class LastUpdatesLoader : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Last update text asset not found in Resources folder.");
             return "No updates available.";
         }
     }

@@ -174,11 +174,7 @@ public class CombatManager : MonoBehaviour
             }
             isPlayerTurn = !isPlayerTurn;
             SetTurn();
-            /*currentAction = null;
-            
-            StartCoroutine(DEBUG_PlayerTurn());*/
         }
-
 
     }
 
@@ -212,7 +208,6 @@ public class CombatManager : MonoBehaviour
     {
         if (isPlayerTurn)
         {
-            //starting players turn
             enemyTurnTagIndicator.SetActive(false);
             playerTurnTagIndicator.SetActive(true);
             waitingTurnLabel.SetActive(false);
@@ -222,7 +217,6 @@ public class CombatManager : MonoBehaviour
         }
         else
         {
-            //ending players turn
             enemyTurnTagIndicator.SetActive(true);
             playerTurnTagIndicator.SetActive(false);
             waitingTurnLabel.SetActive(true);
@@ -302,7 +296,7 @@ public class CombatManager : MonoBehaviour
     }
     public void Click()
     {
-        if (InputBlocker.IsBlocked) return;
+        if (InputBlocker.isBlocked) return;
 
         Vector3 mousePos = Input.mousePosition;
         if (sceneCamera != null)
