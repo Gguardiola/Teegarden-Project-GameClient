@@ -6,7 +6,7 @@ public abstract class Interactable : MonoBehaviour
     [SerializeField]
     public string promptMessage;
     [HideInInspector]
-    public Color PromptTextColor = Color.white;
+    public Color promptTextColor = Color.white;
 
     public void BaseInteract()
     {

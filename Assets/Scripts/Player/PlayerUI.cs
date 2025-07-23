@@ -15,22 +15,20 @@ public class PlayerUI : MonoBehaviour
     private GameObject crosshair;
     [HideInInspector]
     public Color defaultTextColor;
-    public Color PromptTextColor
+    public Color promptTextColor
     {
         get => promptText.color;
         set => promptText.color = value;
     }    
     
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false; 
         defaultTextColor = promptText.color;
-        PromptTextColor = defaultTextColor;
+        promptTextColor = defaultTextColor;
     }
 
-    // Update is called once per frame
     public void UpdateText(string promptMessage)
     {
         promptText.text = promptMessage;
@@ -44,7 +42,6 @@ public class PlayerUI : MonoBehaviour
             Image crosshairImage = crosshair.GetComponent<Image>();
             crosshairImage.sprite = outerCrosshair;
         }
-
 
     }
 }

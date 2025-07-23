@@ -48,7 +48,7 @@ public class InputManager : MonoBehaviour
             Cursor.visible = true;
             Time.timeScale = 0f;
         }
-        else if (!apiClientHandler.isError && !pauseMenu.IsPaused())
+        else if (!apiClientHandler.isError && !pauseMenu.isPaused())
         {
             onFoot.Enable();
             menu.Enable();
@@ -58,7 +58,7 @@ public class InputManager : MonoBehaviour
 
         }
 
-        if (playerHealth != null && playerHealth.IsDead && !pauseMenu.IsPaused())
+        if (playerHealth != null && playerHealth.isDead && !pauseMenu.isPaused())
         {
             onFoot.Disable();
             menu.Disable();
@@ -77,7 +77,7 @@ public class InputManager : MonoBehaviour
     
     private void CheckIfPaused()
     {
-        if (pauseMenu.IsPaused())
+        if (pauseMenu.isPaused())
         {
             onFoot.Disable();
         }

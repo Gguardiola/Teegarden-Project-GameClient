@@ -23,17 +23,17 @@ public class AttackState : BaseState
             losePlayerTimer = 0;
             moveTimer += Time.deltaTime;
             shootTimer += Time.deltaTime;
-            enemyAI.transform.LookAt(enemyAI.Player.transform);
+            enemyAI.transform.LookAt(enemyAI.player.transform);
             if (shootTimer > enemyAI.bulletSpawnRate)
             {
                 Shoot();
             }
             if (moveTimer > Random.Range(3, 7))
             {
-                enemyAI.Agent.SetDestination(enemyAI.transform.position + (Random.insideUnitSphere * 5));
+                enemyAI.agent.SetDestination(enemyAI.transform.position + (Random.insideUnitSphere * 5));
                 moveTimer = 0;
             }
-            enemyAI.LastKnownPlayerPosition = enemyAI.Player.transform.position;
+            enemyAI.lastKnownPlayerPosition = enemyAI.player.transform.position;
         }
         else
         {
@@ -53,7 +53,7 @@ public class AttackState : BaseState
     {
         Transform bulletSpawner = enemyAI.bulletSpawner;
         GameObject bullet = GameObject.Instantiate(Resources.Load("Prefabs/Bullet") as GameObject, bulletSpawner.position, enemyAI.transform.rotation);
-        Vector3 shootDirection = (enemyAI.Player.transform.position - bulletSpawner.position).normalized;
+        Vector3 shootDirection = (enemyAI.player.transform.position - bulletSpawner.position).normalized;
         bullet.GetComponent<Rigidbody>().linearVelocity = Quaternion.AngleAxis(Random.Range(-shootAccuracy, shootAccuracy), Vector3.up) * shootDirection * shootSpeed;
         shootTimer = 0;
     }

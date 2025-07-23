@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public static class AIModelLoader
 {
     private static LocalOnnxModel modelInstance;

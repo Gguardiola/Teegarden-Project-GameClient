@@ -5,7 +5,7 @@ public static class InputBlocker
 {
     private static bool blocked = false;
 
-    public static bool IsBlocked => blocked;
+    public static bool isBlocked => blocked;
 
     public static void BlockForOneFrame()
     {
