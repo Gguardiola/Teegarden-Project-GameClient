@@ -33,7 +33,7 @@ public class GameMenuInputManager : MonoBehaviour
 
     private void Click()
     {
-        if (InputBlocker.IsBlocked) return;
+        if (InputBlocker.isBlocked) return;
         Vector3 mousePos = Input.mousePosition;
         if (sceneCamera != null)
         {

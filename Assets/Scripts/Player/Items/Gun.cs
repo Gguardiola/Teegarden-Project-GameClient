@@ -47,13 +47,11 @@ public abstract class Gun : MonoBehaviour
     {
         isReloading = true;
         StartCoroutine(AnimateGunNotReady());
-        Debug.Log("Reloading...");
         yield return new WaitForSeconds(gunData.reloadTime);
         currentAmmo = gunData.ammountOfBullets;
         lastAmmo = gunData.ammountOfBullets;
         isReloading = false;
         StartCoroutine(AnimateGunReady());
-        Debug.Log("Reload Complete");
     }
 
     private IEnumerator AnimateGunReady()
@@ -111,13 +109,11 @@ public abstract class Gun : MonoBehaviour
     {
         if (isReloading)
         {
-            Debug.Log("Gun is reloading");
             return;
         }
 
         if (currentAmmo <= 0f)
         {
-            Debug.Log("No ammo");
             StartCoroutine(AnimateGunNotReady());
             return;
         }
@@ -132,12 +128,10 @@ public abstract class Gun : MonoBehaviour
     private void HandleShoot()
     {
         currentAmmo--;
-        Debug.Log("Shooting... " + currentAmmo + " bullets left");
         Shoot();
         playerLook.ApplyRecoil(gunData);
         StartGunRecoil();
     }
     
-
     public abstract void Shoot();
 }

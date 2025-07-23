@@ -47,6 +47,6 @@ public class GameMenuButton : MonoBehaviour
 
     public virtual void OnClick()
     {
-        Debug.Log("Click default!");
+        //Do nothing :)
     }
 }

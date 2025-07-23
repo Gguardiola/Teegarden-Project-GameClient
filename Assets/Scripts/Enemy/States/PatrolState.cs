@@ -25,7 +25,7 @@ public class PatrolState : BaseState
 
     public void PatrolCycle()
     {
-        if (enemyAI.Agent.remainingDistance < 0.2f)
+        if (enemyAI.agent.remainingDistance < 0.2f)
         {
             waitTimer += Time.deltaTime;
             if (waitTimer > 3)
@@ -38,7 +38,7 @@ public class PatrolState : BaseState
                 {
                     waypointIndex = 0;
                 }
-                enemyAI.Agent.SetDestination(enemyAI.path.waypoints[waypointIndex].position);
+                enemyAI.agent.SetDestination(enemyAI.path.waypoints[waypointIndex].position);
                 waitTimer = 0;
                 
             }

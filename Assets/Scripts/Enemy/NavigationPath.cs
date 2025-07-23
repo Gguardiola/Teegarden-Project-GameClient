@@ -31,7 +31,6 @@ public class NavigationPath : MonoBehaviour
             labelStyle.normal.textColor = debugColour;
             if (drawNumbers)
                 Handles.Label(waypoints[i].position, i.ToString(), labelStyle);
-            //Draw Lines Between Points.
             if (i >= 1)
             {
                 Gizmos.color = debugColour;

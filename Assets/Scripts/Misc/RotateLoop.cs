@@ -7,10 +7,6 @@ public class RotateLoop : MonoBehaviour
     void Start()
     {
         transformToRotate = GetComponent<Transform>();
-        if (transformToRotate == null)
-        {
-            Debug.LogError("RotateLoop: No Transform component found on the GameObject.");
-        }
     }
 
     void Update()

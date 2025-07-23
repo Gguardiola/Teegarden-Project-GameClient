@@ -21,12 +21,12 @@ public class LocalOnnxModel
 
         if (!File.Exists(modelPath))
         {
-            Debug.LogError($"ONNX model not found at: {modelPath}");
+            Debug.LogError("ONNX model not found at: " + modelPath);
             return;
         }
 
         session = new InferenceSession(modelPath);
-        Debug.Log($"ONNX model loaded from: {modelPath}");
+        Debug.Log("ONNX model loaded from: " + modelPath);
 
         foreach (var kvp in session.InputMetadata)
         {

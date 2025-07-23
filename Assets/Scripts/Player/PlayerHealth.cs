@@ -12,7 +12,7 @@ public class PlayerHealth : MonoBehaviour
     public Image frontHealthBar;
     public Image backHealthBar;
     private float lerpTimer;
-    public bool IsDead
+    public bool isDead
     {
         get { return hp <= 0; }
     }
@@ -25,7 +25,6 @@ public class PlayerHealth : MonoBehaviour
     private float damageAmountToAlpha;
     public GameObject UIgameOverScreen;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         maxHp = PlayerConfig.Instance.maxHealth;
@@ -34,7 +33,6 @@ public class PlayerHealth : MonoBehaviour
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         UpdateHpBar();

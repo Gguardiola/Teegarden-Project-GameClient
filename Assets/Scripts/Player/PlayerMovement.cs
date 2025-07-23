@@ -16,9 +16,7 @@ public class PlayerMovement : MonoBehaviour
     private float bobTimer = 0f;
     private Vector3 defaultArmPos;
     private float armBobSpeed = 6f;
-    
-    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -27,8 +25,6 @@ public class PlayerMovement : MonoBehaviour
         gravity = WorldConfig.Instance.gravity;
         defaultArmPos = itemHolder.transform.localPosition;
     }
-
-    // Update is called once per frame
     void Update()
     {
         isGrounded = controller.isGrounded;

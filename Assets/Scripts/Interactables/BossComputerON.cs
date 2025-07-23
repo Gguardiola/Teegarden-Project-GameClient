@@ -28,9 +28,9 @@ public class BossComputerON : Interactable
     private IEnumerator DiskNotFoundPrompt()
     {
         this.promptMessage = "You need the disk to access the computer!";
-        this.PromptTextColor = Color.red;
+        this.promptTextColor = Color.red;
         yield return new WaitForSeconds(2);
-        this.PromptTextColor = Color.white;
+        this.promptTextColor = Color.white;
         promptMessage = "Insert disk";
     }
 

@@ -49,7 +49,7 @@ public class CombatInputManager : MonoBehaviour
             Cursor.visible = true;
             Time.timeScale = 0f;
         }
-        else if (!apiClientHandler.isError && !pauseMenu.IsPaused())
+        else if (!apiClientHandler.isError && !pauseMenu.isPaused())
         {
             ui.Enable();
             menu.Enable();
@@ -60,7 +60,7 @@ public class CombatInputManager : MonoBehaviour
     
     private void CheckIfPaused()
     {
-        if (pauseMenu.IsPaused())
+        if (pauseMenu.isPaused())
         {
             ui.Disable();
         }
