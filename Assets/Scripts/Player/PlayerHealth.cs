@@ -23,14 +23,17 @@ public class PlayerHealth : MonoBehaviour
     private float overlayFadeSpeed = 5f;
     private float overlayFadeDuration;
     private float damageAmountToAlpha;
-    public GameObject UIgameOverScreen;
+    
+    private PlayerUI playerUI;
 
     void Start()
     {
         maxHp = PlayerConfig.Instance.maxHealth;
         hp = maxHp;
         healthText.text = hp.ToString() + "/" + maxHp.ToString();
-        
+
+        playerUI = GetComponent<PlayerUI>();
+
     }
 
     void Update()
@@ -96,10 +99,9 @@ public class PlayerHealth : MonoBehaviour
         {
             overlay.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, damageAmountToAlpha);
         }
-
         if (hp <= 0)
         {
-            UIgameOverScreen.SetActive(true);
+            playerUI.ShowGameOverScreen();
         }
         
     }

@@ -7381,7 +7381,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Teegarden
+  m_text: Dreyfus
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0290229dba40fdf49b9b1bceeb1cdf98, type: 2}
   m_sharedMaterial: {fileID: -6487537300598953824, guid: 0290229dba40fdf49b9b1bceeb1cdf98, type: 2}
@@ -7654,7 +7654,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '=== Welcome to Teegarden! ===
+  m_text: '=== Welcome to Dreyfus! ===
 
 
     Last updates:
