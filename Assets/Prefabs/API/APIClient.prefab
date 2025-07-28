@@ -1,0 +1,153 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6132864986865794710
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6650451724280844042}
+  - component: {fileID: 4219489571860680417}
+  - component: {fileID: 7908904252799802542}
+  m_Layer: 0
+  m_Name: APIClient
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6650451724280844042
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6132864986865794710}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1176.8062, y: 448.79108, z: -651.464}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4219489571860680417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6132864986865794710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54e64560e7de4516aeb2504dc4d5cc1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsLoggedIn: 0
+  apiClientHandler: {fileID: 7908904252799802542}
+--- !u!114 &7908904252799802542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6132864986865794710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c4697e5cb0d47eb9e70dfeb82a04711, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  apiclient: {fileID: 4219489571860680417}
+  jsonPayload: '{     "enemyInitialAbilities": [         {             "abilityName":
+    "Laser Banana",             "abilityDescription": "The player shots a laster
+    loaded with potassium energy. Ignores the enemy shield.",             "damage":
+    20.0,             "cost": 15.0,             "isHealAbility": false,            
+    "healAmount": 0.0,             "isShieldIgnored": true,             "isPoisonLike":
+    false         },         {             "abilityName": "Heal",             "abilityDescription":
+    "Heals the player",             "damage": 0.0,             "cost": 30.0,            
+    "isHealAbility": true,             "healAmount": 10.0,             "isShieldIgnored":
+    false,             "isPoisonLike": false         },         {             "abilityName":
+    "Precise Shot",             "abilityDescription": "Precise shot that ignores
+    the enemy shield",             "damage": 10.0,             "cost": 20.0,            
+    "isHealAbility": false,             "healAmount": 0.0,             "isShieldIgnored":
+    true,             "isPoisonLike": false         }     ],     "discoveredPlayerAbilities":
+    [         {             "abilityName": "Banana hit",             "abilityDescription":
+    "The players hits the enemy with a solid yellow banana.",             "damage":
+    10.0,             "cost": 10.0,             "isHealAbility": false,            
+    "healAmount": 0.0,             "isShieldIgnored": false,             "isPoisonLike":
+    false         },         {             "abilityName": "Destroyer of Worlds",            
+    "abilityDescription": "Destroys everything, for real.",             "damage":
+    90.0,             "cost": 1.0,             "isHealAbility": false,            
+    "healAmount": 0.0,             "isShieldIgnored": true,             "isPoisonLike":
+    false         }     ],     "turns": [         {             "turnNumber": 0,            
+    "actor": "player",             "abilityUsed": "Banana hit",             "healAmount":
+    0.0,             "abilityDamage": 10.0,             "abilityEnergyCost": 10.0,            
+    "actorHP": 100.0,             "actorEnergy": 90.0,             "opponentHP":
+    90.0,             "opponentEnergy": 100.0,             "isShieldAction": false,            
+    "isSkippedAction": false,             "isHealingAbility": false,            
+    "wasEffective": true         },         {             "turnNumber": 1,            
+    "actor": "enemy",             "abilityUsed": "Precise Shot",             "healAmount":
+    0.0,             "abilityDamage": 10.0,             "abilityEnergyCost": 20.0,            
+    "actorHP": 90.0,             "actorEnergy": 80.0,             "opponentHP": 90.0,            
+    "opponentEnergy": 90.0,             "isShieldAction": false,             "isSkippedAction":
+    false,             "isHealingAbility": false,             "wasEffective": true        
+    },         {             "turnNumber": 2,             "actor": "player",            
+    "abilityUsed": "shield",             "healAmount": 0.0,             "abilityDamage":
+    0.0,             "abilityEnergyCost": 0.0,             "actorHP": 90.0,            
+    "actorEnergy": 70.0,             "opponentHP": 90.0,             "opponentEnergy":
+    80.0,             "isShieldAction": true,             "isSkippedAction": false,            
+    "isHealingAbility": false,             "wasEffective": true         },        
+    {             "turnNumber": 3,             "actor": "enemy",             "abilityUsed":
+    "Precise Shot",             "healAmount": 0.0,             "abilityDamage": 10.0,            
+    "abilityEnergyCost": 20.0,             "actorHP": 90.0,             "actorEnergy":
+    60.0,             "opponentHP": 80.0,             "opponentEnergy": 70.0,            
+    "isShieldAction": false,             "isSkippedAction": false,             "isHealingAbility":
+    false,             "wasEffective": true         },         {             "turnNumber":
+    4,             "actor": "player",             "abilityUsed": "skip",            
+    "healAmount": 0.0,             "abilityDamage": 0.0,             "abilityEnergyCost":
+    0.0,             "actorHP": 80.0,             "actorEnergy": 90.0,            
+    "opponentHP": 90.0,             "opponentEnergy": 60.0,             "isShieldAction":
+    false,             "isSkippedAction": true,             "isHealingAbility": false,            
+    "wasEffective": true         },         {             "turnNumber": 5,            
+    "actor": "enemy",             "abilityUsed": "Heal",             "healAmount":
+    10.0,             "abilityDamage": 0.0,             "abilityEnergyCost": 30.0,            
+    "actorHP": 100.0,             "actorEnergy": 30.0,             "opponentHP":
+    80.0,             "opponentEnergy": 90.0,             "isShieldAction": false,            
+    "isSkippedAction": false,             "isHealingAbility": true,             "wasEffective":
+    true         },         {             "turnNumber": 6,             "actor": "player",            
+    "abilityUsed": "Destroyer of Worlds",             "healAmount": 0.0,            
+    "abilityDamage": 90.0,             "abilityEnergyCost": 1.0,             "actorHP":
+    80.0,             "actorEnergy": 89.0,             "opponentHP": 10.0,            
+    "opponentEnergy": 30.0,             "isShieldAction": false,             "isSkippedAction":
+    false,             "isHealingAbility": false,             "wasEffective": true        
+    },         {             "turnNumber": 7,             "actor": "enemy",            
+    "abilityUsed": "shield",             "healAmount": 0.0,             "abilityDamage":
+    0.0,             "abilityEnergyCost": 0.0,             "actorHP": 10.0,            
+    "actorEnergy": 20.0,             "opponentHP": 80.0,             "opponentEnergy":
+    89.0,             "isShieldAction": true,             "isSkippedAction": false,            
+    "isHealingAbility": false,             "wasEffective": true         },        
+    {             "turnNumber": 8,             "actor": "player",             "abilityUsed":
+    "Banana hit",             "healAmount": 0.0,             "abilityDamage": 10.0,            
+    "abilityEnergyCost": 10.0,             "actorHP": 80.0,             "actorEnergy":
+    79.0,             "opponentHP": 10.0,             "opponentEnergy": 20.0,            
+    "isShieldAction": false,             "isSkippedAction": false,             "isHealingAbility":
+    false,             "wasEffective": false         },         {             "turnNumber":
+    9,             "actor": "enemy",             "abilityUsed": "shield",            
+    "healAmount": 0.0,             "abilityDamage": 0.0,             "abilityEnergyCost":
+    0.0,             "actorHP": 10.0,             "actorEnergy": 10.0,            
+    "opponentHP": 80.0,             "opponentEnergy": 79.0,             "isShieldAction":
+    true,             "isSkippedAction": false,             "isHealingAbility": false,            
+    "wasEffective": true         },         {             "turnNumber": 10,            
+    "actor": "player",             "abilityUsed": "Destroyer of Worlds",            
+    "healAmount": 0.0,             "abilityDamage": 90.0,             "abilityEnergyCost":
+    1.0,             "actorHP": 80.0,             "actorEnergy": 78.0,            
+    "opponentHP": 0.0,             "opponentEnergy": 10.0,             "isShieldAction":
+    false,             "isSkippedAction": false,             "isHealingAbility":
+    false,             "wasEffective": true         }     ],     "winner": "player"
+    }'
+  errorUIPopUp: {fileID: 0}
+  errorText: {fileID: 0}
+  isError: 0
+  pauseMenu: {fileID: 0}
