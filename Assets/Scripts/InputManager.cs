@@ -29,7 +29,7 @@ public class InputManager : MonoBehaviour
         onFoot.Sprint.performed += ctx => movement.Sprint();
         onFoot.Shoot.performed += ctx => gun.TryShoot();
         onFoot.Reload.performed += ctx => gun.TryReload();
-        menu.Pause.performed += ctx => TogglePauseMenu();
+        menu.Pause.performed += ctx => pauseMenu.TogglePauseMenu(onFoot,true);
 
     }
 
@@ -37,55 +37,18 @@ public class InputManager : MonoBehaviour
     {
         CheckFreezeConditions();
     }
-    
     private void CheckFreezeConditions()
     {
-        if (apiClientHandler != null && apiClientHandler.isError)
-        {
-            onFoot.Disable();
-            menu.Disable();
-            Cursor.lockState = CursorLockMode.Confined;
-            Cursor.visible = true;
-            Time.timeScale = 0f;
-        }
-        else if (!apiClientHandler.isError && !pauseMenu.isPaused())
-        {
-            onFoot.Enable();
-            menu.Enable();
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-            Time.timeScale = 1f;
+        apiClientHandler.CheckAPIError(onFoot, menu, false, true);
+        CheckGameOverScreen();
 
-        }
-
+    }
+    
+    private void CheckGameOverScreen()
+    {
         if (playerHealth != null && playerHealth.isDead && !pauseMenu.isPaused())
         {
-            onFoot.Disable();
-            menu.Disable();
-            Cursor.lockState = CursorLockMode.Confined;
-            Cursor.visible = true;
-            Time.timeScale = 0f;
-        }
-    }
-    
-    public void TogglePauseMenu()
-    {
-        pauseMenu.TogglePauseMenu();
-        CheckIfPaused();
-
-    }
-    
-    private void CheckIfPaused()
-    {
-        if (pauseMenu.isPaused())
-        {
-            onFoot.Disable();
-        }
-        else
-        {
-            onFoot.Enable();
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+            pauseMenu.FreezeGame(onFoot, menu, false);
         }
     }
 

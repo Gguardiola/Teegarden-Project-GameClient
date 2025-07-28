@@ -158,7 +158,6 @@ public class CombatManager : MonoBehaviour
         lastActionMessage = previousMessage;
         lastActionMessageText.text = lastActionMessage;
         
-        
     }
 
     public void HandleTurn()
@@ -326,7 +325,7 @@ public class CombatManager : MonoBehaviour
                 {
                     combatLogManager.SetWinner(playerWon ? playerAvatar.GetName(): enemyAvatar.GetName());
                     CombatLog finalLog = combatLogManager.GetFinalLog();
-                   // CombatLogUtils.SaveLogToDisk(finalLog);
+
                     string jsonedLog = JsonUtility.ToJson(finalLog, true);
                     StartCoroutine(PostLogAndContinue(jsonedLog));
                 }

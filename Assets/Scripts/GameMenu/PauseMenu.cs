@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
@@ -10,7 +11,7 @@ public class PauseMenu : MonoBehaviour
     {
         return _isPaused;
     }
-    public void TogglePauseMenu()
+    public void TogglePauseMenu(InputActionMap currentGameplayMap, bool isLocked)
     {
         if (_isPaused)
         {
@@ -20,8 +21,8 @@ public class PauseMenu : MonoBehaviour
         {
             PauseGame();
         }
+        CheckIfPaused(currentGameplayMap, isLocked);
     }
-    
     private void PauseGame()
     {
         _isPaused = true;
@@ -30,6 +31,37 @@ public class PauseMenu : MonoBehaviour
         
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
+    }
+    
+    public void CheckIfPaused(InputActionMap currentGameplayMap, bool isLocked)
+    {
+        if (_isPaused)
+        {
+            currentGameplayMap.Disable();
+        }
+        else
+        {
+            currentGameplayMap.Enable();
+            Cursor.lockState =  isLocked ? CursorLockMode.Locked : CursorLockMode.Confined;
+            Cursor.visible = !isLocked;
+        }
+    }
+    
+    public void FreezeGame(InputActionMap   currentGameplayMap, InputActionMap menuMap, bool isLocked)
+    {
+        currentGameplayMap.Disable();
+        menuMap.Disable();
+        Cursor.lockState = isLocked ? CursorLockMode.Locked : CursorLockMode.Confined;
+        Cursor.visible = !isLocked;
+        Time.timeScale = 0f;
+    }
+    public void UnFreezeGame(InputActionMap currentGameplayMap, InputActionMap menuMap, bool isLocked)
+    {
+        currentGameplayMap.Enable();
+        menuMap.Enable();
+        Cursor.lockState = isLocked ? CursorLockMode.Locked : CursorLockMode.Confined;
+        Cursor.visible = !isLocked;
+        Time.timeScale = 1f;
     }
     public void ResumeGame()
     {

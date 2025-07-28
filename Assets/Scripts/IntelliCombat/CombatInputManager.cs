@@ -24,52 +24,13 @@ public class CombatInputManager : MonoBehaviour
         menu = playerInput.Menu;
         
         ui.Click.performed += ctx => combatManager.Click();
-        menu.Pause.performed += ctx => TogglePauseMenu();
+        menu.Pause.performed += ctx => pauseMenu.TogglePauseMenu(ui, false);
 
-    }
-
-    private void TogglePauseMenu()
-    {
-        pauseMenu.TogglePauseMenu();
-        CheckIfPaused();
     }
     
     void Update()
     {
-        CheckIfAPIError();
-    }
-    
-    private void CheckIfAPIError()
-    {
-        if (apiClientHandler != null && apiClientHandler.isError)
-        {
-            ui.Disable();
-            menu.Disable();
-            Cursor.lockState = CursorLockMode.Confined;
-            Cursor.visible = true;
-            Time.timeScale = 0f;
-        }
-        else if (!apiClientHandler.isError && !pauseMenu.isPaused())
-        {
-            ui.Enable();
-            menu.Enable();
-            Time.timeScale = 1f;
-
-        }
-    }
-    
-    private void CheckIfPaused()
-    {
-        if (pauseMenu.isPaused())
-        {
-            ui.Disable();
-        }
-        else
-        {
-            ui.Enable();
-            Cursor.lockState = CursorLockMode.Confined;
-            Cursor.visible = true;
-        }
+        apiClientHandler.CheckAPIError(ui, menu, false, false);
     }
     
     private void OnEnable()

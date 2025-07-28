@@ -1,6 +1,7 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class APIClientHandler : MonoBehaviour
 {
@@ -10,11 +11,12 @@ public class APIClientHandler : MonoBehaviour
         public GameObject errorUIPopUp;
         public TextMeshProUGUI errorText;
         public bool isError = false;
+        public PauseMenu pauseMenu;
         private void Start()
         {
                 if (apiclient != null)
                 {
-                        StartCoroutine(apiclient.Login("local_debug_player", "password123")); //TODO: hacer que cargue desde un fichero, como su fuese uuid de la copia del juego...
+                        StartCoroutine(apiclient.Login("local_debug_player", "password123"));
                 }
         }
 
@@ -27,6 +29,18 @@ public class APIClientHandler : MonoBehaviour
         void Update()
         {
                 CheckIfLoggedIn();
+        }
+
+        public void CheckAPIError(InputActionMap currentGameplayMap, InputActionMap menu, bool isLockedFreeze, bool isLockedUnfreeze)
+        {
+                if (isError)
+                {
+                        pauseMenu.FreezeGame(currentGameplayMap, menu, isLockedFreeze);
+                }
+                else if (!isError && !pauseMenu.isPaused())
+                {
+                        pauseMenu.UnFreezeGame(currentGameplayMap, menu, isLockedUnfreeze);
+                } 
         }
         
         private void CheckIfLoggedIn()
