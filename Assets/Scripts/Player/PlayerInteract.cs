@@ -7,13 +7,12 @@ public class PlayerInteract : MonoBehaviour
     public float distance;
     [SerializeField]
     private LayerMask mask;
-    private PlayerUI playerUI;
+    public PlayerUI playerUI;
     private InputManager inputManager;
 
     void Start()
     {
         cam = GetComponent<PlayerLook>().cam;
-        playerUI = GetComponent<PlayerUI>();
         inputManager = GetComponent<InputManager>();
         distance = PlayerConfig.Instance.interactionDistance;
     }

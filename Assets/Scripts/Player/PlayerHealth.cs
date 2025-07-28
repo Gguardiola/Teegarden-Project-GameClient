@@ -18,22 +18,20 @@ public class PlayerHealth : MonoBehaviour
     }
 
     [Header("Player overlay")] 
+    public PlayerUI playerUI;
+
     public Image overlay;
     private float overlayDuration = 2f;
     private float overlayFadeSpeed = 5f;
     private float overlayFadeDuration;
     private float damageAmountToAlpha;
     
-    private PlayerUI playerUI;
 
     void Start()
     {
         maxHp = PlayerConfig.Instance.maxHealth;
         hp = maxHp;
         healthText.text = hp.ToString() + "/" + maxHp.ToString();
-
-        playerUI = GetComponent<PlayerUI>();
-
     }
 
     void Update()
