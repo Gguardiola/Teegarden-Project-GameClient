@@ -3182,7 +3182,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   useEvents: 1
   promptMessage: Take damage
-  PromptTextColor: {r: 1, g: 1, b: 1, a: 1}
+  promptTextColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!65 &223272642
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10413,6 +10413,7 @@ MonoBehaviour:
   innerCrosshair: {fileID: 21300000, guid: 9ba96dc7cccd7bc438d2466e63928700, type: 3}
   outerCrosshair: {fileID: 21300000, guid: 9016c3198da036a4686c7ffa2f5fa5b2, type: 3}
   crosshair: {fileID: 1486402546784315721}
+  UIgameOverScreen: {fileID: 2016418607}
   defaultTextColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &937281785
 MonoBehaviour:
@@ -10432,7 +10433,6 @@ MonoBehaviour:
   frontHealthBar: {fileID: 3658397760590368277}
   backHealthBar: {fileID: 2968589456400196588}
   overlay: {fileID: 1915436074}
-  UIgameOverScreen: {fileID: 2016418607}
 --- !u!114 &937281790
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16315,7 +16315,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   useEvents: 1
   promptMessage: Use Keypad
-  PromptTextColor: {r: 1, g: 1, b: 1, a: 1}
+  promptTextColor: {r: 1, g: 1, b: 1, a: 1}
   door: {fileID: 787160940}
 --- !u!114 &1337037143
 MonoBehaviour:
@@ -17609,7 +17609,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8204794030150257885, guid: ebb7eccfb03ce5c4a89aabf38cbc2f12, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8204794030150257885, guid: ebb7eccfb03ce5c4a89aabf38cbc2f12, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
@@ -17618,38 +17618,38 @@ PrefabInstance:
     - target: {fileID: 8204794030150257885, guid: ebb7eccfb03ce5c4a89aabf38cbc2f12, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 937281768}
+      objectReference: {fileID: 4940370296820176823}
     - target: {fileID: 8204794030150257885, guid: ebb7eccfb03ce5c4a89aabf38cbc2f12, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 4940370296820176823}
     - target: {fileID: 8204794030150257885, guid: ebb7eccfb03ce5c4a89aabf38cbc2f12, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8204794030150257885, guid: ebb7eccfb03ce5c4a89aabf38cbc2f12, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8204794030150257885, guid: ebb7eccfb03ce5c4a89aabf38cbc2f12, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: TogglePauseMenu
+      value: ResumeGame
       objectReference: {fileID: 0}
     - target: {fileID: 8204794030150257885, guid: ebb7eccfb03ce5c4a89aabf38cbc2f12, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: 
+      value: ResumeGame
       objectReference: {fileID: 0}
     - target: {fileID: 8204794030150257885, guid: ebb7eccfb03ce5c4a89aabf38cbc2f12, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: InputManager, Assembly-CSharp
+      value: PauseMenu, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8204794030150257885, guid: ebb7eccfb03ce5c4a89aabf38cbc2f12, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: InputManager, Assembly-CSharp
+      value: PauseMenu, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8204794030150257885, guid: ebb7eccfb03ce5c4a89aabf38cbc2f12, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: 
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -17874,7 +17874,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 344.9, y: 69.85, z: 1}
-  m_Center: {x: 66.6, y: -27.7, z: 0}
+  m_Center: {x: 69.44, y: -27.7, z: 0}
 --- !u!1 &1543954944
 GameObject:
   m_ObjectHideFlags: 0
@@ -20738,9 +20738,10 @@ MonoBehaviour:
     false,             "isSkippedAction": false,             "isHealingAbility":
     false,             "wasEffective": true         }     ],     "winner": "player"
     }'
-  ErrorUIPopUp: {fileID: 1143210371}
-  ErrorText: {fileID: 1338600756}
+  errorUIPopUp: {fileID: 1143210371}
+  errorText: {fileID: 1338600756}
   isError: 0
+  pauseMenu: {fileID: 4940370296820176823}
 --- !u!114 &1757398792
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21477,7 +21478,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   useEvents: 0
   promptMessage: Use Keypad
-  PromptTextColor: {r: 1, g: 1, b: 1, a: 1}
+  promptTextColor: {r: 1, g: 1, b: 1, a: 1}
   door: {fileID: 122047816}
 --- !u!64 &1820660050
 MeshCollider:
@@ -25969,7 +25970,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   useEvents: 1
   promptMessage: Heal
-  PromptTextColor: {r: 1, g: 1, b: 1, a: 1}
+  promptTextColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!224 &7863649932645553074
 RectTransform:
   m_ObjectHideFlags: 0

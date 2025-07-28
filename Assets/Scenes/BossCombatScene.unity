@@ -7512,9 +7512,10 @@ MonoBehaviour:
     false,             "isSkippedAction": false,             "isHealingAbility":
     false,             "wasEffective": true         }     ],     "winner": "player"
     }'
-  ErrorUIPopUp: {fileID: 1756741326}
-  ErrorText: {fileID: 1365807983}
+  errorUIPopUp: {fileID: 1756741326}
+  errorText: {fileID: 1365807983}
   isError: 0
+  pauseMenu: {fileID: 74284224}
 --- !u!114 &296486256
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -13,6 +13,7 @@ public class PlayerUI : MonoBehaviour
     private Sprite outerCrosshair;
     [SerializeField]
     private GameObject crosshair;
+    public GameObject UIgameOverScreen;
     [HideInInspector]
     public Color defaultTextColor;
     public Color promptTextColor
@@ -43,5 +44,13 @@ public class PlayerUI : MonoBehaviour
             crosshairImage.sprite = outerCrosshair;
         }
 
+    }
+    
+    public void ShowGameOverScreen()
+    {
+        if (UIgameOverScreen != null)
+        {
+            UIgameOverScreen.SetActive(true);
+        }
     }
 }
