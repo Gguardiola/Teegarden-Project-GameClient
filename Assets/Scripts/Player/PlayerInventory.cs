@@ -1,33 +1,40 @@
 using System;
 using System.Collections.Generic;
+using Unity.Collections;
 using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
-{
+{ 
+    private Dictionary<string, int> inventory = new Dictionary<string, int>();
     [SerializeField]
-    List<String> inventory = new List<String>();
+    PlayerUI playerUI;
     
-    public void AddItem(string item)
+    public void AddItem(string item, Sprite sprite)
     {
-        inventory.Add(item);
+        int slotIndex = playerUI.UIAddItemToInventorySlot(sprite);
+        if (slotIndex != -1)
+        {
+            inventory.Add(item, slotIndex);
+        }
+
     }
     
     public String GetItem(String itemName)
     {
-        if (inventory.Contains(itemName))
+        if (inventory.ContainsKey(itemName))
         {
             return itemName;
         }
-        else
-        {
-            return null;
-        }
+
+        return null;
     }
 
     public bool DeleteItem(String itemName)
     {
-        if (inventory.Contains(itemName))
+        if (inventory.ContainsKey(itemName))
         {
+            
+            playerUI.UIRemoveItemFromInventorySlot(inventory.GetValueOrDefault(itemName, -1));
             inventory.Remove(itemName);
             return true;
         }
