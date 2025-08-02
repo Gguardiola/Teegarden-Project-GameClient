@@ -62,7 +62,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isActionInProgress: 0
-  energyCost: 10
+  energyCost: 20
 --- !u!114 &383126550610896607
 MonoBehaviour:
   m_ObjectHideFlags: 0

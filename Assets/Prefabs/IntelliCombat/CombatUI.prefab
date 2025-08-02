@@ -12021,7 +12021,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Shield
 
-    (-10p energy)'
+    (-20p energy)'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0290229dba40fdf49b9b1bceeb1cdf98, type: 2}
   m_sharedMaterial: {fileID: -6487537300598953824, guid: 0290229dba40fdf49b9b1bceeb1cdf98, type: 2}

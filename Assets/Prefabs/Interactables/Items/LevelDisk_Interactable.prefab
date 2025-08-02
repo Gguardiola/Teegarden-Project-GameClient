@@ -69,7 +69,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   useEvents: 0
   promptMessage: Collect disk
-  PromptTextColor: {r: 1, g: 1, b: 1, a: 1}
+  promptTextColor: {r: 1, g: 1, b: 1, a: 1}
+  collectableItemName: Item_disk
 --- !u!1001 &4216147912798524002
 PrefabInstance:
   m_ObjectHideFlags: 0
