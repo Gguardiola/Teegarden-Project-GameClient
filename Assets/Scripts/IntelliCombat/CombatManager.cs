@@ -26,6 +26,7 @@ public class CombatManager : MonoBehaviour
     public GameObject inActionButtons;
     public GameObject actionButtons;
     public GameObject combatOverButton;
+    public GameObject uILastAction;
     public TextMeshProUGUI lastActionMessageText;
     public TextMeshProUGUI playerHealthText;
     public TextMeshProUGUI playerEnergyText;
@@ -140,6 +141,7 @@ public class CombatManager : MonoBehaviour
     {
         lastActionMessage = message;
         lastActionMessageText.text = lastActionMessage;
+        StartCoroutine(UILastActionAnimate());
     }
     
     public void SetTemporalLastActionMessage(string message)
@@ -157,8 +159,33 @@ public class CombatManager : MonoBehaviour
         yield return new WaitForSeconds(5f);
         lastActionMessage = previousMessage;
         lastActionMessageText.text = lastActionMessage;
-        
+        StartCoroutine(UILastActionAnimate());
+
     }
+    private IEnumerator UILastActionAnimate()
+    {
+        if (uILastAction != null)
+        {
+            Transform t = uILastAction.transform;
+
+            Vector3 originalScale = Vector3.one;
+            Vector3 targetScale = new Vector3(1.06f, 1.1f, 1.0f);
+            float speed = 8f;
+            float threshold = 0.01f;
+            while ((t.localScale - targetScale).magnitude > threshold)
+            {
+                t.localScale = Vector3.Lerp(t.localScale, targetScale, Time.deltaTime * speed);
+                yield return null;
+            }
+            while ((t.localScale - originalScale).magnitude > threshold)
+            {
+                t.localScale = Vector3.Lerp(t.localScale, originalScale, Time.deltaTime * speed);
+                yield return null;
+            }
+            t.localScale = originalScale;
+        }
+    }
+
 
     public void HandleTurn()
     {
@@ -380,7 +407,7 @@ public class CombatManager : MonoBehaviour
         }
         else
         {
-            playerEnergyText.color = new Color32(27, 190, 24, 212);
+            playerEnergyText.color = new Color32(35, 248, 32, 255);
         }
         
         if (enemyAvatar.GetHealth() < 20f)
@@ -389,7 +416,7 @@ public class CombatManager : MonoBehaviour
         }
         else
         {
-            enemyHealthText.color = new Color32(27, 190, 24, 212);
+            enemyHealthText.color = new Color32(35, 248, 32, 255);
         }
     }
     

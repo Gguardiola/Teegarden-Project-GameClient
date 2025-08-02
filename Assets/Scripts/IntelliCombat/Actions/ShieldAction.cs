@@ -1,11 +1,10 @@
-
 using IntelliCombat.Actions;
 using UnityEngine;
 
 public class ShieldAction : Action
 {
     [SerializeField]
-    private float energyCost = 10f;
+    private float energyCost = 20f;
 
     public float GetEnergyCost()
     {
