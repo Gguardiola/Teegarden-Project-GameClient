@@ -37,5 +37,5 @@ public class PlayerLook : MonoBehaviour
     {
         currentRecoil = Vector3.MoveTowards(currentRecoil, Vector3.zero, Time.deltaTime * gunData.resetRecoilSpeed);
         targetRecoil = Vector3.MoveTowards(targetRecoil, Vector3.zero, Time.deltaTime * gunData.resetRecoilSpeed);
-    }    
+    }   
 }
