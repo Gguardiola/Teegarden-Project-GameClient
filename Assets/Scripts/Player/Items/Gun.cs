@@ -48,6 +48,7 @@ public abstract class Gun : MonoBehaviour
     {
         isReloading = true;
         StartCoroutine(AnimateGunNotReady());
+        playerUI.UIShowReloadingAnimation();
         yield return new WaitForSeconds(gunData.reloadTime);
         currentAmmo = gunData.ammountOfBullets;
         lastAmmo = gunData.ammountOfBullets;
@@ -133,6 +134,7 @@ public abstract class Gun : MonoBehaviour
         currentAmmo--;
         Shoot();
         playerLook.ApplyRecoil(gunData);
+        playerUI.UICrosshairBoop();
         StartGunRecoil();
     }
     

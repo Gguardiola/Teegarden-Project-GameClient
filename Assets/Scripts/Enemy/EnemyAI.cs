@@ -33,6 +33,7 @@ public class EnemyAI : MonoBehaviour
     public float eyeHeight = 0.6f;
 
     [Header("Attack values")] public Transform bulletSpawner;
+    public ParticleSystem DamageParticleSystem;
 
     [Range(0.1f, 10f)] public float bulletSpawnRate;
 
@@ -95,6 +96,10 @@ public class EnemyAI : MonoBehaviour
     public void TakeDamage(float damage)
     {
         health -= damage;
+        if (DamageParticleSystem != null)
+        {
+            DamageParticleSystem.Play();
+        }
         CheckHealth();
     }
 }

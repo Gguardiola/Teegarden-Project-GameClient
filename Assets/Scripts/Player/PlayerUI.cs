@@ -11,11 +11,17 @@ public class PlayerUI : MonoBehaviour
     private TextMeshProUGUI promptText;
     [SerializeField]
     private GameObject crosshair;
-    [SerializeField]
+    private Vector3 crosshairAttackTransformOriginalScale;
+    private Coroutine crosshairAttackCoroutine;
+    [SerializeField]    
     private GameObject interactableCrosshair;
+    public LevelContext levelContext;
     public GameObject UIgameOverScreen;
     public GameObject UINoAmmoLabel;
     public GameObject UIHitmarker;
+    public Image UIReloadingLabelFront;
+    public Image UIReloadingLabelBack;
+    public TextMeshProUGUI UILevelInfoNameText;
     [HideInInspector]
     public Color defaultTextColor;
     public BasicAnimations basicAnimations;
@@ -32,6 +38,8 @@ public class PlayerUI : MonoBehaviour
         Cursor.visible = false; 
         defaultTextColor = promptText.color;
         promptTextColor = defaultTextColor;
+        crosshairAttackTransformOriginalScale = crosshair.transform.localScale;
+        UIUpdateLevelName();
 
     }
 
@@ -106,6 +114,49 @@ public class PlayerUI : MonoBehaviour
             UIHitmarker.SetActive(true);
             yield return new WaitForSeconds(0.1f);
             UIHitmarker.SetActive(false);
+        }
+    }
+
+    public void UICrosshairBoop()
+    {
+        if (crosshairAttackCoroutine != null)
+        {
+            StopCoroutine(crosshairAttackCoroutine);
+        }
+        crosshairAttackCoroutine= StartCoroutine(basicAnimations.AnimationPulseInterruptable(crosshair, crosshairAttackTransformOriginalScale, crosshair.transform.localScale * 1.4f, 30f));
+    }
+
+    public void UIShowReloadingAnimation()
+    {
+        UIReloadingLabelFront.gameObject.SetActive(true);
+        UIReloadingLabelBack.gameObject.SetActive(true);
+        UIReloadingLabelFront.fillAmount = 0f;
+        UIReloadingLabelBack.fillAmount = 1f;
+        StartCoroutine(ReloadingAnimation());
+    }
+
+    private IEnumerator ReloadingAnimation()
+    {
+        float time = 0f;
+        float duration = 1f;
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+            float fillAmount = Mathf.Clamp01(time / duration);
+            UIReloadingLabelFront.fillAmount = fillAmount;
+            yield return null;
+        }
+        UIReloadingLabelFront.gameObject.SetActive(false);
+        UIReloadingLabelBack.gameObject.SetActive(false);
+        UIReloadingLabelFront.fillAmount = 0f;
+    }
+
+    private void UIUpdateLevelName()
+    {
+        if (UILevelInfoNameText != null)
+        {
+            string levelName = levelContext.currentLevelName;
+            UILevelInfoNameText.text = levelName;
         }
     }
 }
