@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -13,10 +14,11 @@ public class PlayerUI : MonoBehaviour
     [SerializeField]
     private GameObject interactableCrosshair;
     public GameObject UIgameOverScreen;
+    public GameObject UINoAmmoLabel;
+    public GameObject UIHitmarker;
     [HideInInspector]
     public Color defaultTextColor;
     public BasicAnimations basicAnimations;
-
     public List<GameObject> UIInventorySlots;
     public Color promptTextColor
     {
@@ -83,6 +85,27 @@ public class PlayerUI : MonoBehaviour
             itemImage.sprite = null;
             UIInventorySlots[slotIndex].SetActive(false);
             Debug.Log("Removed item from slot index: " + slotIndex);;
+        }
+    }
+
+    public void UISetNoAmmoLabel()
+    {
+            UINoAmmoLabel.SetActive(true);
+            StartCoroutine(basicAnimations.AnimationPulse(UINoAmmoLabel, UINoAmmoLabel.transform.localScale, UINoAmmoLabel.transform.localScale * 1.2f, 20f));
+    }
+    
+    public void UIUnSetNoAmmoLabel()
+    {
+            UINoAmmoLabel.SetActive(false);
+    }
+
+    public IEnumerator ShowHitmarker()
+    {
+        if (UIHitmarker != null)
+        {
+            UIHitmarker.SetActive(true);
+            yield return new WaitForSeconds(0.1f);
+            UIHitmarker.SetActive(false);
         }
     }
 }

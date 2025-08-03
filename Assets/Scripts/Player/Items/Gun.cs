@@ -6,6 +6,7 @@ public abstract class Gun : MonoBehaviour
     public GunData gunData;
     [HideInInspector]public Transform cameraTransform;
     public PlayerLook playerLook;
+    public PlayerUI playerUI;
     private Transform gunPosition;
     protected float currentAmmo = 0f;
     protected float lastAmmo = 0f;
@@ -58,6 +59,7 @@ public abstract class Gun : MonoBehaviour
     {
         if (!isReloading)
         {
+            playerUI.UIUnSetNoAmmoLabel();
             float time = 0f;
             while (time < 2f)
             {
@@ -73,6 +75,7 @@ public abstract class Gun : MonoBehaviour
     {
         if (isReloading || currentAmmo == 0f)
         {
+            if(currentAmmo == 0f) playerUI.UISetNoAmmoLabel();
             float time = 0f;
             while (time < 2f)
             {

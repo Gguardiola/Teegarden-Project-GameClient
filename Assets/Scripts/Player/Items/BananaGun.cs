@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class Bananagun : Gun
 {
-    public TextMeshPro ammoDisplay;
+    public TextMeshProUGUI ammoDisplay;
     private Color defaultDisplayColor;
 
     public override void Start()
     {
         base.Start();
-        ammoDisplay = ammoDisplay.GetComponent<TextMeshPro>();
-        defaultDisplayColor = ammoDisplay.GetComponent<TextMeshPro>().color;
+        ammoDisplay = ammoDisplay.GetComponent<TextMeshProUGUI>();
+        defaultDisplayColor = ammoDisplay.GetComponent<TextMeshProUGUI>().color;
         UpdateAmmoDisplay();
     }
 
@@ -50,6 +50,7 @@ public class Bananagun : Gun
             BulletHitVFX(hit);
             if (hit.collider.CompareTag("Enemy"))
             {
+                StartCoroutine(playerUI.ShowHitmarker());
                 EnemyAI enemyAI = hit.collider.GetComponent<EnemyAI>();
                 if (enemyAI != null)
                 {
