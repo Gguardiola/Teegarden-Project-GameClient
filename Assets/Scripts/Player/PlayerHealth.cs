@@ -19,7 +19,7 @@ public class PlayerHealth : MonoBehaviour
 
     [Header("Player overlay")] 
     public PlayerUI playerUI;
-
+    public ParticleSystem damageParticleSystem;
     public Image overlay;
     private float overlayDuration = 2f;
     private float overlayFadeSpeed = 5f;
@@ -93,6 +93,10 @@ public class PlayerHealth : MonoBehaviour
         lerpTimer = 0f;
         overlayFadeDuration = 0f;
         damageAmountToAlpha = ((maxHp / 100f) - (hp / maxHp));
+        if (damageParticleSystem != null)
+        {
+            damageParticleSystem.Play();
+        }
         if (hp < PlayerConfig.Instance.criticalHealth)
         {
             overlay.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, damageAmountToAlpha);
