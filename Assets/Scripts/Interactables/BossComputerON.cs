@@ -12,6 +12,8 @@ public class BossComputerON : Interactable
     
     protected override void Interact()
     {
+        SoundManager.Instance.PlaySFX("DefaultInteractable");
+
         if (playerInventory.GetItem("Item_disk") != null)
         {
             if (playerInventory.DeleteItem("Item_disk"))

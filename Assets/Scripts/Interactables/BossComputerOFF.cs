@@ -7,6 +7,8 @@ public class BossComputerOFF : Interactable
     
     protected override void Interact()
     {
+        SoundManager.Instance.PlaySFX("DefaultInteractable");
+
         gameObject.SetActive(false);
         if (computerONPrefab != null)
         {
