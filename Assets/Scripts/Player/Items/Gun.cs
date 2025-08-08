@@ -44,7 +44,7 @@ public abstract class Gun : MonoBehaviour
         }
     }
 
-    private IEnumerator Reload()
+    public virtual IEnumerator Reload()
     {
         isReloading = true;
         StartCoroutine(AnimateGunNotReady());

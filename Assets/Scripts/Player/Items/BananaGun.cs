@@ -37,7 +37,7 @@ public class Bananagun : Gun
     private IEnumerator BulletFire(Vector3 target, RaycastHit hit)
     {
         GameObject bulletTrail = Instantiate(gunData.bulletTrailPrefab, gunMuzzle.position, Quaternion.identity);
-
+        SoundManager.Instance.PlaySFX("Shoot_Bananagun");
         while (bulletTrail != null && Vector3.Distance(bulletTrail.transform.position, target) > 0.1f)
         {
             bulletTrail.transform.position = Vector3.MoveTowards(bulletTrail.transform.position, target, gunData.bulletSpeed * Time.deltaTime);
@@ -50,6 +50,7 @@ public class Bananagun : Gun
             BulletHitVFX(hit);
             if (hit.collider.CompareTag("Enemy"))
             {
+                SoundManager.Instance.PlaySFX("Hitmarker");
                 StartCoroutine(playerUI.ShowHitmarker());
                 EnemyAI enemyAI = hit.collider.GetComponent<EnemyAI>();
                 if (enemyAI != null)
@@ -58,6 +59,12 @@ public class Bananagun : Gun
                 }
             }
         }
+    }
+
+    public override IEnumerator Reload()
+    {
+        SoundManager.Instance.PlaySFX("Reload_Bananagun");
+        return base.Reload();
     }
 
     private void BulletHitVFX(RaycastHit hit)
