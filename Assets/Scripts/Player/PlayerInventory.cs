@@ -15,6 +15,7 @@ public class PlayerInventory : MonoBehaviour
         if (slotIndex != -1)
         {
             inventory.Add(item, slotIndex);
+            SoundManager.Instance.PlaySFX("Pickup");
         }
 
     }

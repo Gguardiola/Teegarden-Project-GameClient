@@ -10,6 +10,7 @@ public class GameMenuInputManager : MonoBehaviour
     private GameMenuButton lastClickedButton;
     void Awake()
     {
+        SoundManager.Instance.PlayMusic("MainMenu");
         playerInput = new PlayerInput();
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;

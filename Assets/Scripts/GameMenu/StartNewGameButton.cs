@@ -9,6 +9,7 @@ public class StartNewGameButton : GameMenuButton
     
     private void StartNewGame()
     {
+        SoundManager.Instance.StopMusic("MainMenu");
         SceneManager.LoadScene("SampleScene");
     }
     
