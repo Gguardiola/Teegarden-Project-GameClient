@@ -89,6 +89,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        SoundManager.Instance.PlaySFX("PlayerHurt");
         hp -= damage;
         lerpTimer = 0f;
         overlayFadeDuration = 0f;
@@ -103,6 +104,7 @@ public class PlayerHealth : MonoBehaviour
         }
         if (hp <= 0)
         {
+            SoundManager.Instance.PlaySFX("GameOver");
             playerUI.ShowGameOverScreen();
         }
         
@@ -110,6 +112,7 @@ public class PlayerHealth : MonoBehaviour
     
     public void RestoreHealth(float amount)
     {
+        SoundManager.Instance.PlaySFX("PlayerHeal");
         hp += amount;
         lerpTimer = 0f;
     }

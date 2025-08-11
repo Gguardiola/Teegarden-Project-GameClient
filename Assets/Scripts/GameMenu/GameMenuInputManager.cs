@@ -10,7 +10,6 @@ public class GameMenuInputManager : MonoBehaviour
     private GameMenuButton lastClickedButton;
     void Awake()
     {
-        SoundManager.Instance.PlayMusic("MainMenu");
         playerInput = new PlayerInput();
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
@@ -22,6 +21,7 @@ public class GameMenuInputManager : MonoBehaviour
     
     void Start()
     {
+        SoundManager.Instance.PlayMusic("MainMenu");
         StartCoroutine(BlockInputStartup());
     }
 
@@ -51,7 +51,8 @@ public class GameMenuInputManager : MonoBehaviour
                     }
                     lastClickedButton = clickedButton;
                     clickedButton.OnClick();
-                    InputBlocker.BlockForOneFrame();
+                    SoundManager.Instance.PlaySFX("MenuClick");
+                    InputBlocker.BlockForSeconds(0.3f);
                 }
             }
         }
