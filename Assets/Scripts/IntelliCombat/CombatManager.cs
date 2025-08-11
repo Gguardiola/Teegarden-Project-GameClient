@@ -48,7 +48,7 @@ public class CombatManager : MonoBehaviour
     {
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
-
+        SoundManager.Instance.PlayMusic("Intellicombat");
         playerAvatar = new Avatar();
         enemyAvatar = new Avatar("enemy");
         turnResolver = new TurnResolver(this);
