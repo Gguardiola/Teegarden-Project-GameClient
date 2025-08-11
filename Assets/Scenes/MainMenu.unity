@@ -8680,6 +8680,10 @@ MonoBehaviour:
     soundClip: {fileID: 8300000, guid: f56ad5412f7b6af4c9e17dfef5444fa2, type: 3}
   - soundName: DefaultInteractable
     soundClip: {fileID: 8300000, guid: 56fd14145b43b3949b1c18ca379d222f, type: 3}
+  - soundName: MenuClick
+    soundClip: {fileID: 8300000, guid: ebf9370205b75774f9a18dac68273cf8, type: 3}
+  - soundName: VariantClick
+    soundClip: {fileID: 8300000, guid: b0cefbf4784efc24192493c506ab45bb, type: 3}
   musicSource: {fileID: 1602449243}
   sfxSource: {fileID: 1881919911}
 --- !u!4 &2038703342

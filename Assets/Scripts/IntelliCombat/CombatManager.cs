@@ -123,6 +123,10 @@ public class CombatManager : MonoBehaviour
     {
         if (playerAvatar.GetHealth() <= 0)
         {
+            if (!isCombatOver)
+            {
+                SoundManager.Instance.PlaySFX("IntellicombatLose");
+            }
             isCombatOver = true;
             SetLastActionMessage("You lost the combat!");
             playerWon = false;
@@ -130,6 +134,10 @@ public class CombatManager : MonoBehaviour
         }
         else if (enemyAvatar.GetHealth() <= 0)
         {
+            if (!isCombatOver)
+            {
+                SoundManager.Instance.PlaySFX("IntellicombatSuccess");
+            }
             isCombatOver = true;
             SetLastActionMessage("You won the combat!");
             playerWon = true;
@@ -331,6 +339,8 @@ public class CombatManager : MonoBehaviour
             bool raycastHit = Physics.Raycast(ray, out RaycastHit hit);
             if (raycastHit && hit.collider != null && hit.collider.CompareTag("CombatAction"))
             {
+                SoundManager.Instance.PlaySFX("MenuClick");
+
                 currentAction = hit.collider.GetComponent<Action>();
                 if (currentAction != null) currentAction.PerformAction();
             }
@@ -340,16 +350,21 @@ public class CombatManager : MonoBehaviour
                 MenuButton menuButton = hit.collider.GetComponent<MenuButton>();
                 if (menuButton != null && menuButton.Name == "GoBackButton" && !popUpMessageEnabled)
                 {
+                    SoundManager.Instance.PlaySFX("MenuClick");
+
                     GoBack();
                 }
 
                 if (menuButton != null && menuButton.Name == "EndTurnButton" && !popUpMessageEnabled)
                 {
+                    SoundManager.Instance.PlaySFX("VariantClick");
+
                     HandleTurn();
                 }
                 
                 if (menuButton != null && menuButton.Name == "CombatOverButton" && !popUpMessageEnabled)
                 {
+                    SoundManager.Instance.PlaySFX("MenuClick");
                     combatLogManager.SetWinner(playerWon ? playerAvatar.GetName(): enemyAvatar.GetName());
                     CombatLog finalLog = combatLogManager.GetFinalLog();
 
@@ -359,17 +374,23 @@ public class CombatManager : MonoBehaviour
 
                 if (menuButton != null && menuButton.Name == "SelectAbilityButton" && !popUpMessageEnabled)
                 {
+                    SoundManager.Instance.PlaySFX("MenuClick");
+
                     currentAction.FirstReactorEvent(((SelectAbilityButton)menuButton).abilityData);
                 }
             }
 
             if (raycastHit && hit.collider != null && hit.collider.CompareTag("ShowPopup") && !popUpMessageEnabled)
             {
+                SoundManager.Instance.PlaySFX("MenuClick");
+
                 popUpMessageEnabled = true;
                 popUpMessageBox.SetActive(true);
             }
             if (raycastHit && hit.collider != null && hit.collider.CompareTag("ClosePopup"))
             {
+                SoundManager.Instance.PlaySFX("MenuClick");
+
                 popUpMessageEnabled = false;
                 popUpMessageBox.SetActive(false);
             }
