@@ -5669,6 +5669,8 @@ MonoBehaviour:
   musicSounds:
   - soundName: MainMenu
     soundClip: {fileID: 8300000, guid: 1df7e54b9b6a2704294f8a6c53c64061, type: 3}
+  - soundName: Intellicombat
+    soundClip: {fileID: 8300000, guid: e069dfc192126f040854e765c681a138, type: 3}
   sfxSounds:
   - soundName: Reload_Bananagun
     soundClip: {fileID: 8300000, guid: 89dbbd4a2348bd04c8f9787c3613482f, type: 3}
