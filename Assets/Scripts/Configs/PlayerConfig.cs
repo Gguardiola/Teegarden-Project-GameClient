@@ -11,9 +11,6 @@ public class PlayerConfig : ScriptableObject
     public float criticalHealth = 50f;
     [Header("Interactions")]
     public float interactionDistance = 3f;
-    [Header("Camera")]
-    public float xSensitivity = 30f;
-    public float ySensitivity = 30f;
 #if UNITY_EDITOR
     [UnityEditor.MenuItem("Tools/Select PlayerConfig")]
     public static void SelectConfig()

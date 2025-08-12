@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class SoundManager : MonoBehaviour
@@ -20,7 +21,13 @@ public class SoundManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    
+
+    private void Start()
+    {
+        musicSource.volume = SettingsContext.Instance.GetMusicVolume();
+        sfxSource.volume = SettingsContext.Instance.GetSFXVolume();
+    }
+
     public void PlayMusic(string soundName)
     {
         Sound sound = System.Array.Find(musicSounds, s => s.soundName == soundName);
