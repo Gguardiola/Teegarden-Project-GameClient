@@ -6,6 +6,7 @@ public class PauseMenu : MonoBehaviour
 {
 
     public GameObject pauseMenuUI;
+    public GameObject settingsMenuUI;
     private bool _isPaused = false;
     public bool isPaused() 
     {
@@ -68,6 +69,7 @@ public class PauseMenu : MonoBehaviour
         _isPaused = false;
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
+        HideSettingsScreen();
     }
     
     public void AbandonGame()
@@ -76,6 +78,17 @@ public class PauseMenu : MonoBehaviour
         SceneManager.LoadScene("MainMenu"); //TODO: if necessary, gather game run stats and show it con the game over screen
         
         
+    }
+
+    public void ShowSettingsScreen()
+    {
+        settingsMenuUI.SetActive(true);
+        SettingsContext.Instance.TriggerSliders();
+    }
+
+    public void HideSettingsScreen()
+    {
+        settingsMenuUI.SetActive(false);
     }
     
 }
