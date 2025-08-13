@@ -9741,7 +9741,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921e3b424a6f4249a7a418797ab98b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isCanvas: 1
+  isMenuLikeGameplay: 1
 --- !u!4 &1828366441
 Transform:
   m_ObjectHideFlags: 0
