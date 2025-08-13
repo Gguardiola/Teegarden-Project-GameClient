@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class SettingsContext : MonoBehaviour
 {
     public static SettingsContext Instance;
-    public bool isCanvas = false;
+    public bool isMenuLikeGameplay = false;
     private SettingsConfig settingsConfig;
     private Slider musicSlider;
     private Slider effectsSlider;
@@ -103,7 +103,7 @@ public class SettingsContext : MonoBehaviour
     public void UpdateMouseSensibilitySettings()
     {
         settingsConfig.xSensitivity = mouseSensibilitySlider.value;
-        if (!isCanvas)
+        if (!isMenuLikeGameplay)
         {
             GameObject.Find("Player").GetComponent<PlayerLook>().xSensitivity = mouseSensibilitySlider.value;
         }
