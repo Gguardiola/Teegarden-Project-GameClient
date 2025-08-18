@@ -14,8 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   speed: 5
-  jumpHeight: 1.5
+  jumpHeight: 1
   criticalHealth: 50
   interactionDistance: 3
-  xSensitivity: 30
-  ySensitivity: 30
