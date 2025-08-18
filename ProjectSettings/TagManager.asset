@@ -10,6 +10,7 @@ TagManager:
   - AttackAbility
   - ShowPopup
   - ClosePopup
+  - Trigger
   layers:
   - Default
   - TransparentFX
@@ -22,7 +23,7 @@ TagManager:
   - Gun
   - HUD
   - Intellicombat3DScene
-  - 
+  - Trigger
   - 
   - 
   - 
