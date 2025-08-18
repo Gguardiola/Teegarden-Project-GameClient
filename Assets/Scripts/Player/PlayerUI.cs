@@ -15,7 +15,6 @@ public class PlayerUI : MonoBehaviour
     private Coroutine crosshairAttackCoroutine;
     [SerializeField]    
     private GameObject interactableCrosshair;
-    public LevelContext levelContext;
     public GameObject UIgameOverScreen;
     public GameObject UINoAmmoLabel;
     public GameObject UIHitmarker;
@@ -151,11 +150,11 @@ public class PlayerUI : MonoBehaviour
         UIReloadingLabelFront.fillAmount = 0f;
     }
 
-    private void UIUpdateLevelName()
+    public void UIUpdateLevelName()
     {
         if (UILevelInfoNameText != null)
         {
-            string levelName = levelContext.currentLevelName;
+            string levelName = LevelContext.Instance.currentLevelName;
             UILevelInfoNameText.text = levelName;
         }
     }
