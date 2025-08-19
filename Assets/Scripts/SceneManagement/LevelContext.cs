@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class LevelContext : MonoBehaviour
@@ -15,5 +16,22 @@ public class LevelContext : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+    void Start()
+    {
+        SetLevelToShip();
+    }
+
+    public void SetLevelToShip()
+    {
+        currentLevelName = "The Dreyfus";
+        SoundManager.Instance.PlayMusic("Ship");
+    }
+    
+    public void SetLevelToStation()
+    {
+        currentLevelName = "The Station";
+        SoundManager.Instance.StopMusic("Ship");
+        SoundManager.Instance.PlayMusic("Station");
     }
 }

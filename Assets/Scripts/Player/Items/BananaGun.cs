@@ -58,6 +58,12 @@ public class Bananagun : Gun
                     enemyAI.TakeDamage(gunData.damage);
                 }
             }
+
+            if (hit.collider.CompareTag("Creatura"))
+            {
+                SoundManager.Instance.PlaySFX("Creatura");
+            }
+               
         }
     }
 
