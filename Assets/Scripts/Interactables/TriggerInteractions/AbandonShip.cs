@@ -8,6 +8,7 @@ public class AbandonShip : TriggerEvent
     public GameObject playerSpawner;
     private bool hasTriggered = false;
     public CameraFade cameraFadeEffect;
+    public CameraRenderingPresets cameraRenderingPresets;
     protected override void OnEnterTrigger()
     {
         if (playerSpawner == null)
@@ -16,7 +17,8 @@ public class AbandonShip : TriggerEvent
         }
         
         if (hasTriggered) return;
-        hasTriggered = true; 
+        hasTriggered = true;
+        SoundManager.Instance.PlaySFX("PhantomEnters");
         StartCoroutine(WaitAndTeleport());
         
     
@@ -24,7 +26,8 @@ public class AbandonShip : TriggerEvent
 
     private IEnumerator WaitAndTeleport()
     {
-        yield return new WaitForSeconds(5f);
+        SoundManager.Instance.PlaySFX("ShipTakeoff");
+        yield return new WaitForSeconds(15f);
         cameraFadeEffect.FadeIn();
 
         yield return new WaitForSeconds(5f);
@@ -32,8 +35,9 @@ public class AbandonShip : TriggerEvent
         cc.enabled = false;
         triggerObject.transform.position = playerSpawner.transform.position;
         cc.enabled = true;
-        LevelContext.Instance.currentLevelName = "Laboratory";
+        LevelContext.Instance.SetLevelToStation();
         GameObject.Find("PlayerUI").GetComponent<PlayerUI>().UIUpdateLevelName();
+        cameraRenderingPresets.SetInteriorPreset();
         cameraFadeEffect.FadeOut();      
           
 

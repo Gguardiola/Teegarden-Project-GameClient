@@ -11,6 +11,7 @@ TagManager:
   - ShowPopup
   - ClosePopup
   - Trigger
+  - Creatura
   layers:
   - Default
   - TransparentFX
