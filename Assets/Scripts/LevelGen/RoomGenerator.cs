@@ -1,5 +1,8 @@
+using System.Collections;
 using UnityEngine;
 using System.Collections.Generic;
+using Unity.AI.Navigation;
+using UnityEngine.AI;
 
 public class RoomGenerator : MonoBehaviour
 {
@@ -17,14 +20,19 @@ public class RoomGenerator : MonoBehaviour
     private int stepXZ;
     private bool bossPlaced = false;
     private bool keyPlaced = false;
+    private NavMeshSurface npcSurface;
 
     private void Start()
     {
+        npcSurface = GetComponent<NavMeshSurface>();
         stepXZ = Mathf.RoundToInt(roomSpacing);
 
         GenerateRoomsRecursive(Vector3Int.zero, null, true);
 
         InstantiateRooms();
+
+        StartCoroutine(BakeNavMeshSurface());
+        StartCoroutine(InstanciateNPCs());
     }
 
     private void GenerateRoomsRecursive(Vector3Int pos, RoomData fromRoom, bool isSpawn = false)
@@ -120,6 +128,42 @@ public class RoomGenerator : MonoBehaviour
         {
             int j = Random.Range(i, list.Count);
             (list[i], list[j]) = (list[j], list[i]);
+        }
+    }
+    
+    private IEnumerator BakeNavMeshSurface()
+    {
+        if (npcSurface != null)
+        {
+            npcSurface.BuildNavMesh();
+            yield return null;
+        }
+    }
+
+    private IEnumerator InstanciateNPCs()
+    {
+        yield return null;
+
+
+        GameObject[] spawners = GameObject.FindGameObjectsWithTag("EnemySpawner");
+        foreach (GameObject spawner in spawners)
+        {
+            GameObject enemyPrefab = Resources.Load<GameObject>("Prefabs/Enemies/SecurityRobotEnemy");
+            GameObject enemyPathPrefab = Resources.Load<GameObject>("Prefabs/Enemies/EnemyPath");
+            GameObject navigationPath = Instantiate(enemyPathPrefab, spawner.transform.position, Quaternion.identity);
+            GameObject enemy = Instantiate(enemyPrefab, spawner.transform.position, Quaternion.identity);
+            NavMeshAgent agent = enemy.GetComponent<NavMeshAgent>();
+            enemy.GetComponent<EnemyAI>().path = navigationPath.GetComponent<NavigationPath>();
+            agent.enabled = false;
+            NavMeshHit hit;
+            if (NavMesh.SamplePosition(enemy.transform.position, out hit, 5f, NavMesh.AllAreas))
+            {
+                enemy.transform.position = hit.position;
+            }
+
+            agent.enabled = true;
+            agent.Warp(enemy.transform.position);
+            yield return null;
         }
     }
 }

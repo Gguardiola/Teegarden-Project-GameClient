@@ -9,6 +9,7 @@ public class AbandonShip : TriggerEvent
     private bool hasTriggered = false;
     public CameraFade cameraFadeEffect;
     public CameraRenderingPresets cameraRenderingPresets;
+    public GameObject[] objectsToEnable;
     protected override void OnEnterTrigger()
     {
         if (playerSpawner == null)
@@ -27,6 +28,10 @@ public class AbandonShip : TriggerEvent
     private IEnumerator WaitAndTeleport()
     {
         SoundManager.Instance.PlaySFX("ShipTakeoff");
+        foreach (GameObject obj in objectsToEnable)
+        {
+            obj.SetActive(true);
+        }
         yield return new WaitForSeconds(15f);
         cameraFadeEffect.FadeIn();
 

@@ -28,7 +28,7 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] 
     public string currentState;
     [Header("Sight values")]
-    public float sightRange = 20f;
+    public float sightRange = 35f;
     public float fieldOfView = 85f;
     public float eyeHeight = 0.6f;
 

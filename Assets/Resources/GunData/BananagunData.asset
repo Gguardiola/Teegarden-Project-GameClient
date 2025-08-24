@@ -18,12 +18,12 @@ MonoBehaviour:
     m_Bits: 4294967295
   gunRange: 50
   fireRate: 8
-  ammountOfBullets: 30
+  ammountOfBullets: 20
   reloadTime: 1
-  recoilAmount: 5
+  recoilAmount: 3
   maxRecoil: {x: 1, y: 2}
-  recoilSpeed: 400
+  recoilSpeed: 200
   resetRecoilSpeed: 10
   bulletTrailPrefab: {fileID: 2157784463883066281, guid: d1553bb31604f6745a94ac2f20bba553, type: 3}
   bulletSpeed: 100
-  damage: 20
+  damage: 10
