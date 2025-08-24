@@ -7,9 +7,9 @@ public class AttackState : BaseState
     
     private float losePlayerTimer;
     private float shootTimer;
-    public float loseTime = 3f;
-    public float shootSpeed = 20f;
-    public float shootAccuracy = 3f;
+    public float loseTime = 5f;
+    public float shootSpeed = 70f;
+    public float shootAccuracy = 2f;
 
     public override void Enter()
     {
@@ -28,7 +28,7 @@ public class AttackState : BaseState
             {
                 Shoot();
             }
-            if (moveTimer > Random.Range(3, 7))
+            if (moveTimer > Random.Range(2, 4))
             {
                 enemyAI.agent.SetDestination(enemyAI.transform.position + (Random.insideUnitSphere * 5));
                 moveTimer = 0;

@@ -21,9 +21,22 @@ public abstract class TriggerEvent : MonoBehaviour
             OnEnterTrigger();
         }
     }
+    
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject == triggerObject)
+        {
+            OnExitTrigger();
+        }
+    }
 
     protected virtual void OnEnterTrigger()
     {
         Debug.Log("collision with trigger detected");
+    }
+    
+    protected virtual void OnExitTrigger()
+    {
+        Debug.Log("exiting trigger detected");
     }
 }

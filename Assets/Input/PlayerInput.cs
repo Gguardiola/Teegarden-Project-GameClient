@@ -1053,7 +1053,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""d7d90cb0-7b9c-4296-88f6-434aa910f3d1"",
-                    ""path"": ""<Keyboard>/k"",
+                    ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
