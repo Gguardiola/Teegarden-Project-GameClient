@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4062467253254535265}
   - component: {fileID: 1558926568750217788}
   - component: {fileID: 6330675852891429135}
+  - component: {fileID: 4331920772379926410}
   m_Layer: 6
   m_Name: LevelDisk_Interactable
   m_TagString: Untagged
@@ -71,6 +72,19 @@ MonoBehaviour:
   promptMessage: Collect disk
   promptTextColor: {r: 1, g: 1, b: 1, a: 1}
   collectableItemName: Item_disk
+--- !u!114 &4331920772379926410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1692484022766351223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 425987deaa1b2f24e8bdd15f947b022c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotateSpeed: 10
 --- !u!1001 &4216147912798524002
 PrefabInstance:
   m_ObjectHideFlags: 0
