@@ -12,6 +12,7 @@ public class SearchState : BaseState
     public override void Perform()
     {
         CheckHealth();
+        PlayStateSFX();
         if (enemyAI.CanSeePlayer())
         {
             enemyStateMachine.ChangeState(enemyAI.attackState);  

@@ -10,4 +10,9 @@ public abstract class BaseState
     {
         enemyAI.CheckHealth();
     }
+
+    protected void PlayStateSFX()
+    {
+            enemyAI.SwapSFX();
+    }
 }

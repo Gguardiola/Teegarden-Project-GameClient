@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EnemyBullet : MonoBehaviour
 {
-    public float damage = 30;
+    public float damage = 20;
     private void OnCollisionEnter(Collision collision)
     {
         Transform hitTransform = collision.transform;
