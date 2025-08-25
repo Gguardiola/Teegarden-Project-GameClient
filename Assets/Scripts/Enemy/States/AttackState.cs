@@ -18,6 +18,7 @@ public class AttackState : BaseState
     public override void Perform()
     {
         CheckHealth();
+        PlayStateSFX();
         if (enemyAI.CanSeePlayer())
         {
             losePlayerTimer = 0;
@@ -51,6 +52,7 @@ public class AttackState : BaseState
     
     public void Shoot()
     {
+        enemyAI.WeaponSFX();
         Transform bulletSpawner = enemyAI.bulletSpawner;
         GameObject bullet = GameObject.Instantiate(Resources.Load("Prefabs/Bullet") as GameObject, bulletSpawner.position, enemyAI.transform.rotation);
         Vector3 shootDirection = (enemyAI.player.transform.position - bulletSpawner.position).normalized;

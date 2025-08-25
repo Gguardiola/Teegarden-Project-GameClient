@@ -97,6 +97,7 @@ public class SettingsContext : MonoBehaviour
     {
         settingsConfig.sfxVolume = effectsSlider.value;
         SoundManager.Instance.sfxSource.volume = effectsSlider.value;
+        SoundManager.Instance.ManageSceneSources(effectsSlider.value);
         SavePlayerSettings();
     }
     
