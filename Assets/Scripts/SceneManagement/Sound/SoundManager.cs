@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using UnityEngine;
 
 public class SoundManager : MonoBehaviour
@@ -7,6 +8,7 @@ public class SoundManager : MonoBehaviour
     public Sound[] sfxSounds;
     public AudioSource musicSource;
     public AudioSource sfxSource;
+    public AudioSource[] sceneSources;
 
     public static SoundManager Instance;
 
@@ -26,6 +28,24 @@ public class SoundManager : MonoBehaviour
     {
         musicSource.volume = SettingsContext.Instance.GetMusicVolume();
         sfxSource.volume = SettingsContext.Instance.GetSFXVolume();
+        ManageSceneSources(SettingsContext.Instance.GetSFXVolume());
+    }
+    
+    public void SubscribeToSceneSources(AudioSource source)
+    {
+        sceneSources = sceneSources.Append(source).ToArray();
+        ManageSceneSources(SettingsContext.Instance.GetSFXVolume());
+    }
+    
+    public void ManageSceneSources(float volume)
+    {
+        if (sceneSources != null && sceneSources.Length > 0)
+        {
+            foreach (var source in sceneSources)
+            {
+                source.volume = SettingsContext.Instance.GetSFXVolume();
+            }            
+        }
     }
 
     public void PlayMusic(string soundName)

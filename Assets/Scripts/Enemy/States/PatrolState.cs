@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PatrolState : BaseState
@@ -12,6 +13,7 @@ public class PatrolState : BaseState
     public override void Perform()
     {
         CheckHealth();
+        PlayStateSFX();
         PatrolCycle();
         if (enemyAI.CanSeePlayer())
         {

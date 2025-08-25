@@ -12,6 +12,11 @@ public class PlayerLook : MonoBehaviour
     private Vector3 targetRecoil = Vector3.zero;
     private Vector3 currentRecoil = Vector3.zero;
 
+    private void Start()
+    {
+        xSensitivity = Resources.Load<SettingsConfig>("Settings/SettingsConfig").xSensitivity;
+    }
+
     public void ProcessLook(Vector2 input)
     {
         float mouseX = input.x;

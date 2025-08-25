@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 public class EnemyAI : MonoBehaviour
@@ -34,8 +35,16 @@ public class EnemyAI : MonoBehaviour
 
     [Header("Attack values")] public Transform bulletSpawner;
     public ParticleSystem DamageParticleSystem;
+    public GameObject DeathParticleSystemPrefab;
 
     [Range(0.1f, 10f)] public float bulletSpawnRate;
+
+    [Header("SFX")] 
+    public AudioClip patrolSFX;
+    public AudioClip attackSFX;
+    public AudioClip searchSFX;
+    public AudioClip weaponSFX;
+    private AudioClip currentSFX;
 
     void Start()
     {
@@ -49,6 +58,9 @@ public class EnemyAI : MonoBehaviour
         enemyStateMachine.Initialize(patrolState);
         
         _player = GameObject.FindGameObjectWithTag("Player");
+        SoundManager.Instance.SubscribeToSceneSources(GetComponent<AudioSource>());
+        currentSFX = patrolSFX;
+        StartCoroutine(PlaySFX());
     }
 
     void Update()
@@ -89,6 +101,12 @@ public class EnemyAI : MonoBehaviour
     {
         if (health <= 0)
         {
+            Instantiate(Resources.Load("Prefabs/Interactables/InteractableUnityEventsHeal"), transform.position, Quaternion.identity);
+            DeathSFX();
+            if (DeathParticleSystemPrefab != null)
+            {
+                Instantiate(DeathParticleSystemPrefab, transform.position, Quaternion.identity);
+            }
             Destroy(gameObject);
         }
     }
@@ -101,5 +119,41 @@ public class EnemyAI : MonoBehaviour
             DamageParticleSystem.Play();
         }
         CheckHealth();
+    }
+    
+    public void SwapSFX()
+    {
+        if (currentState == "SearchState")
+        {
+            currentSFX = searchSFX;
+        }
+        else if (currentState == "AttackState")
+        {
+            currentSFX = attackSFX;
+        }
+        else
+        {
+            currentSFX = patrolSFX;
+        }
+    }
+
+    private IEnumerator PlaySFX()
+    {
+        while (true)
+        {
+            GetComponent<AudioSource>().PlayOneShot(currentSFX);
+            yield return new WaitForSeconds(Random.Range(2, 8));
+        }
+        
+    }
+    
+    public void WeaponSFX()
+    {
+        GetComponent<AudioSource>().PlayOneShot(weaponSFX);
+    }
+
+    public void DeathSFX()
+    {
+        SoundManager.Instance.PlaySFX("SecurityRobotDeath");
     }
 }
