@@ -6,8 +6,8 @@ using UnityEngine.Networking;
 
 public class APIClient : MonoBehaviour
 {
-    private string _baseUrl = "http://localhost";
-    private string _accessToken;
+    private string baseUrl = "http://157.245.22.76";
+    private string accessToken;
     public bool IsLoggedIn = false;
     public APIClientHandler apiClientHandler;
     public IEnumerator Login(string username, string password)
@@ -16,14 +16,14 @@ public class APIClient : MonoBehaviour
         form.AddField("username", username);
         form.AddField("password", password);
 
-        using UnityWebRequest www = UnityWebRequest.Post($"{_baseUrl}/login", form);
+        using UnityWebRequest www = UnityWebRequest.Post($"{baseUrl}/login", form);
         yield return www.SendWebRequest();
 
         if (www.result == UnityWebRequest.Result.Success)
         {
             var response = www.downloadHandler.text;
             Debug.Log("Login response: " + response);
-            _accessToken = JsonUtility.FromJson<TokenResponse>(response).access_token;
+            accessToken = JsonUtility.FromJson<TokenResponse>(response).access_token;
             IsLoggedIn = true;
             StartCoroutine(DownloadLatestModel());
         }
@@ -36,12 +36,12 @@ public class APIClient : MonoBehaviour
 
     public IEnumerator PostCombatLog(string jsonPayload)
     {
-        using UnityWebRequest www = new UnityWebRequest($"{_baseUrl}/combatlog", "POST");
+        using UnityWebRequest www = new UnityWebRequest($"{baseUrl}/combatlog", "POST");
         byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonPayload);
         www.uploadHandler = new UploadHandlerRaw(bodyRaw);
         www.downloadHandler = new DownloadHandlerBuffer();
         www.SetRequestHeader("Content-Type", "application/json");
-        www.SetRequestHeader("Authorization", $"Bearer {_accessToken}");
+        www.SetRequestHeader("Authorization", $"Bearer {accessToken}");
 
         yield return www.SendWebRequest();
 
@@ -58,8 +58,8 @@ public class APIClient : MonoBehaviour
     
     IEnumerator DownloadLatestModel()
     {
-        UnityWebRequest request = UnityWebRequest.Get(_baseUrl + "/model?version=latest");
-        request.SetRequestHeader("Authorization", $"Bearer {_accessToken}");
+        UnityWebRequest request = UnityWebRequest.Get(baseUrl + "/model?version=latest");
+        request.SetRequestHeader("Authorization", $"Bearer {accessToken}");
         request.SetRequestHeader("Accept", "application/json"); 
         yield return request.SendWebRequest();
 
