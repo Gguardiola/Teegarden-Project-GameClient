@@ -68,7 +68,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useEvents: 0
-  promptMessage: Initialize computer
+  promptMessage: '[E] Initialize computer'
+  promptTextColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &6788710271564805315
 PrefabInstance:
   m_ObjectHideFlags: 0

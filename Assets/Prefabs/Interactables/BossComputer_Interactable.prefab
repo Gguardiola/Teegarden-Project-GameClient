@@ -783,7 +783,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useEvents: 0
-  promptMessage: Turn on
+  promptMessage: '[E] Turn on'
   promptTextColor: {r: 1, g: 1, b: 1, a: 1}
   computerONPrefab: {fileID: 422586644044213957, guid: fea8ed0088812a0489b3f3fd00184c4b, type: 3}
 --- !u!65 &7097713442596476494

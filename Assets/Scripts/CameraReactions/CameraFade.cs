@@ -19,9 +19,8 @@ public class CameraFade : MonoBehaviour
 
         private IEnumerator FadeCoroutine(float startAlpha, float endAlpha)
         {
-            //turn alpha from raw image to de endalpha using lerp
             float elapsedTime = 0f;
-            float duration = 1f; // Duration of the fade in seconds
+            float duration = 1f;
             Color color = fadeImage.color;
             color.a = startAlpha;
             fadeImage.color = color;
