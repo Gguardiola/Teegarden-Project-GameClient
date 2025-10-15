@@ -38,7 +38,6 @@ public class AIModelEnemyStrategy : MonoBehaviour, IEnemyStrategy
         Debug.Log("Normalized: [" + string.Join(",", normalized) + "]");
 
         float[] qValues = AIModelLoader.GetIntellicombatModel().PredictRawQValues(normalized);
-        //float[] qValues = AIModelLoader.GetIntellicombatModel().PredictRawQValues(stateVector);
         
         int[] orderedIndices = Enumerable.Range(0, qValues.Length)
             .OrderByDescending(i => qValues[i])

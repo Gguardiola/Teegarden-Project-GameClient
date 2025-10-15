@@ -5739,6 +5739,7 @@ MonoBehaviour:
     soundClip: {fileID: 8300000, guid: c95ed48a269da734e9c803d9310d2afe, type: 3}
   musicSource: {fileID: 1163536391}
   sfxSource: {fileID: 1642119357}
+  sceneSources: []
 --- !u!4 &855159684
 Transform:
   m_ObjectHideFlags: 0
@@ -13608,6 +13609,10 @@ PrefabInstance:
       propertyPath: actionControlUI
       value: 
       objectReference: {fileID: 74284223}
+    - target: {fileID: 6740436918758086537, guid: 34fa8b50fb2a0f945a8780c21673c68a, type: 3}
+      propertyPath: 'abilities.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 358f63b154ba2594789001085bbf6850, type: 2}
     - target: {fileID: 6779298501054380839, guid: 34fa8b50fb2a0f945a8780c21673c68a, type: 3}
       propertyPath: m_Mesh
       value: 

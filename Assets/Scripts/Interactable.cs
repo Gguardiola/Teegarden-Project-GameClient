@@ -1,24 +1,24 @@
 using UnityEngine;
 
-public abstract class Interactable : MonoBehaviour
-{
-    public bool useEvents;
-    [SerializeField]
-    public string promptMessage;
-    [HideInInspector]
-    public Color promptTextColor = Color.white;
-
-    public void BaseInteract()
+    public abstract class Interactable : MonoBehaviour
     {
-        if (useEvents)
+        public bool useEvents;
+        [SerializeField]
+        public string promptMessage;
+        [HideInInspector]
+        public Color promptTextColor = Color.white;
+
+        public void BaseInteract()
         {
-            GetComponent<InteractionEvent>().onInteract.Invoke();
+            if (useEvents)
+            {
+                GetComponent<InteractionEvent>().onInteract.Invoke();
+            }
+            Interact();
         }
-        Interact();
-    }
 
-    protected virtual void Interact()
-    {
-        //override this method in derived classes to implement specific interaction logic
+        protected virtual void Interact()
+        {
+            //override this method in derived classes to implement specific interaction logic
+        }
     }
-}

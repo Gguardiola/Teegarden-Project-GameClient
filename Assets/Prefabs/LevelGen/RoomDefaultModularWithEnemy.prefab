@@ -51,6 +51,10 @@ PrefabInstance:
       propertyPath: m_VersionIndex
       value: 4487
       objectReference: {fileID: 0}
+    - target: {fileID: 392254303296612159, guid: 3f12d8684a8c1694abffd9fafec14eeb, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
     - target: {fileID: 464636913066250785, guid: 3f12d8684a8c1694abffd9fafec14eeb, type: 3}
       propertyPath: m_VersionIndex
       value: 2942
@@ -91,6 +95,10 @@ PrefabInstance:
       propertyPath: m_VersionIndex
       value: 2195
       objectReference: {fileID: 0}
+    - target: {fileID: 3076255433868784765, guid: 3f12d8684a8c1694abffd9fafec14eeb, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
     - target: {fileID: 3176339933564797321, guid: 3f12d8684a8c1694abffd9fafec14eeb, type: 3}
       propertyPath: m_VersionIndex
       value: 1155
@@ -195,10 +203,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: RoomDefaultModularWithEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 6748044596368541191, guid: 3f12d8684a8c1694abffd9fafec14eeb, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7180881065822651713, guid: 3f12d8684a8c1694abffd9fafec14eeb, type: 3}
       propertyPath: m_VersionIndex
       value: 3092
       objectReference: {fileID: 0}
+    - target: {fileID: 8048128091085592284, guid: 3f12d8684a8c1694abffd9fafec14eeb, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
+    - target: {fileID: 8069735394035873013, guid: 3f12d8684a8c1694abffd9fafec14eeb, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
     - target: {fileID: 8141609316182520795, guid: 3f12d8684a8c1694abffd9fafec14eeb, type: 3}
       propertyPath: m_VersionIndex
       value: 965

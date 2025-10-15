@@ -15,7 +15,7 @@ MonoBehaviour:
   abilityName: Heavy Shot
   abilityDescription: The user uses a large amount of energy to damage the enemy.
   damage: 50
-  cost: 50
+  cost: 80
   isHealAbility: 0
   healAmount: 0
   isShieldIgnored: 0
