@@ -1,6 +1,6 @@
 # Dreyfus - GameClient
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/Gguardiola/Teegarden-Project-GameClient?style=flat-square)
-![Dreyfus Banner](resources/misc/dreyfusBanner.png)
+![Dreyfus Banner](Resources/Misc/DreyfusBanner.png)
 ## Overview
 **Dreyfus GameClient (codename Teegarden Project)** is my **_final degree project_**, which consists of developing a cloud-based distributed system that integrates a video game (also developed from scratch) where the final enemy is controlled by an artificial intelligence model trained using supervised learning and reinforcement learning methods.
 
