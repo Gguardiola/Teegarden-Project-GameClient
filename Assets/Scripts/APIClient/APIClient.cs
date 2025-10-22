@@ -7,6 +7,9 @@ using UnityEngine.Networking;
 public class APIClient : MonoBehaviour
 {
     private string baseUrl = "http://157.245.22.76";
+    /*
+    private string baseUrl = "http://localhost";
+    */
     
     private string accessToken;
     public bool IsLoggedIn = false;

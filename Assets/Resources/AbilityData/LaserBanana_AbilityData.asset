@@ -19,5 +19,5 @@ MonoBehaviour:
   cost: 15
   isHealAbility: 0
   healAmount: 0
-  isShieldIgnored: 1
+  isShieldIgnored: 0
   isPoisonLike: 0
