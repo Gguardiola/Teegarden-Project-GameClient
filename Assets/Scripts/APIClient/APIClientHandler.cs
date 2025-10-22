@@ -47,7 +47,7 @@ public class APIClientHandler : MonoBehaviour
         {
                 if (apiclient != null && apiclient.IsLoggedIn && !loadSent)
                 {
-                        StartCoroutine(apiclient.PostCombatLog(jsonPayload));
+                        //StartCoroutine(apiclient.PostCombatLog(jsonPayload));
                         loadSent = true;
                 }
         }
