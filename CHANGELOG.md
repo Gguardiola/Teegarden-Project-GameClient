@@ -1,3 +1,12 @@
+### v1.0.1
+
+commit 551bbfb6cfbde5fe67c970690b7d1b4f09b79c54
+Author: Gguardiola <gabriel.guardiola1999@gmail.com>
+Date:   Wed Oct 22 23:23:05 2025 +0200
+
+    refactor: API Client handler post combatlog fix
+
+
 ### v0.1.88
 
 commit 460250a90b982e51b3103a2d2b71900859ae4ee0
